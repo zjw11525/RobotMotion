@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <DUT Name="ST_CSV_Record" Id="{f3b045fa-0646-4df9-ac8c-36a0a87a4b15}">
+    <Declaration><![CDATA[TYPE ST_CSV_Record :
+STRUCT
+	sName 	: T_MaxString 	:= '';
+	nNumber	: UDINT 		:= 0;
+	fPos	: LREAL 		:= 0.0;
+	bOP		: BOOL 			:= FALSE;
+	sDesc	: STRING(40)	:= '';
+	data	: ARRAY[0..7] OF BYTE;
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

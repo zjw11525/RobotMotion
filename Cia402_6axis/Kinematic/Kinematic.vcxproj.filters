@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<Filter Include="Header Files">
+			<UniqueIdentifier>{e3ace2d7-0d12-44ca-8e18-779e8609dc38}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="Source Files">
+			<UniqueIdentifier>{3be04df6-36e0-4d6b-af59-14abdf7760a1}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="TwinCAT UM Files">
+			<UniqueIdentifier>{bfbaa3e0-608b-48e7-8ea7-4923cf0d997e}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="TwinCAT RT Files">
+			<UniqueIdentifier>{1940138a-6095-4bb7-98c7-9cbe73d8256a}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="TMC Files">
+			<UniqueIdentifier>{6ed318d5-d4e5-45b3-b5b0-66dd0555436f}</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="Resource.h">
+			<Filter>Header Files</Filter>
+		</ClInclude>
+		<ClInclude Include="TcPch.h">
+			<Filter>Header Files</Filter>
+		</ClInclude>
+		<ClInclude Include="KinematicClassFactory.h">
+			<Filter>Header Files</Filter>
+		</ClInclude>
+		<ClInclude Include="KinematicInterfaces.h">
+			<Filter>Header Files</Filter>
+		</ClInclude>
+		<ClInclude Include="KinematicServices.h">
+			<Filter>Header Files</Filter>
+		</ClInclude>
+		<ClInclude Include="KinematicCtrl.h">
+			<Filter>TwinCAT UM Files</Filter>
+		</ClInclude>
+		<ClInclude Include="KinematicDriver.h">
+			<Filter>TwinCAT RT Files</Filter>
+		</ClInclude>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="TcPch.cpp">
+			<Filter>Source Files</Filter>
+		</ClCompile>
+		<ClCompile Include="KinematicClassFactory.cpp">
+			<Filter>Source Files</Filter>
+		</ClCompile>
+		<ClCompile Include="KinematicCtrl.cpp">
+			<Filter>TwinCAT UM Files</Filter>
+		</ClCompile>
+		<ClCompile Include="KinematicW32.cpp">
+			<Filter>TwinCAT UM Files</Filter>
+		</ClCompile>
+		<ClCompile Include="KinematicDriver.cpp">
+			<Filter>TwinCAT RT Files</Filter>
+		</ClCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<ResourceCompile Include="Kinematic.rc">
+			<Filter>Source Files</Filter>
+		</ResourceCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="KinematicW32.def">
+			<Filter>TwinCAT UM Files</Filter>
+		</None>
+		<None Include="Kinematic.tmc">
+			<Filter>TMC Files</Filter>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<Midl Include="KinematicW32.idl">
+			<Filter>TwinCAT UM Files</Filter>
+		</Midl>
+	</ItemGroup>
+</Project>

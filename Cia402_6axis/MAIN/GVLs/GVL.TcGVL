@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
+  <GVL Name="GVL" Id="{c57c9985-bfd7-4fd7-88f8-55bc55ab230f}">
+    <Declaration><![CDATA[VAR_GLOBAL CONSTANT
+	MAX_CSV_ROWS 			: UDINT := 7165;//1680;//hang
+	MAX_CSV_COLUMNS 		: UDINT := 5;//lie 0-5
+	MAX_CSV_FIELD_LENGTH	: UDINT := 20;
+END_VAR
+
+VAR_GLOBAL
+
+axisNum: INT:=0;
+//Axis Bind link
+Axis:ARRAY[0..5]OF AXIS_REF;	
+
+//Axis Power On
+AxisPower:ARRAY[0..5]OF MC_Power;
+AxisPowerTrigger:ARRAY[0..5]OF BOOL;
+AxisPowerReady:ARRAY[0..5]OF BOOL;
+AxisPowerBusy:ARRAY[0..5]OF BOOL;
+AxisPowerActive:ARRAY[0..5]OF BOOL;
+AxisPowerError:ARRAY[0..5]OF BOOL;
+AxisPowerErrorID:ARRAY[0..5]OF UDINT;
+
+//Axis Move Absolute
+AxisMoveAbsolute:ARRAY[0..5]OF MC_MoveAbsolute;
+AxisMoveTrigger:ARRAY[0..5]OF BOOL;
+AxisMovePosition:ARRAY[0..5]OF LREAL;
+AxisMoveSpeed:ARRAY[0..5]OF LREAL;
+AxisMoveAcceleration:ARRAY[0..5]OF LREAL;
+AxisMoveDeceleration:ARRAY[0..5]OF LREAL;
+AxisMoveJerk:ARRAY[0..5]OF LREAL;
+AxisMoveAbsoluteDone:ARRAY[0..5]OF BOOL;
+AxisMoveAbsoluteBusy:ARRAY[0..5]OF BOOL;
+AxisMoveAbsoluteActive:ARRAY[0..5]OF BOOL;
+AxisMoveAbsoluteCommandAborted:ARRAY[0..5]OF BOOL;
+AxisMoveAbsoluteError:ARRAY[0..5]OF BOOL;
+AxisMoveAbsoluteErrorID:ARRAY[0..5]OF UDINT;
+
+//Axis Stop
+MC_Stop1:ARRAY[0..5]OF MC_Stop;
+AxisStopTrigger:ARRAY[0..5]OF BOOL;
+AxisStopDeceleration:ARRAY[0..5]OF LREAL;
+AxisStopJerk:ARRAY[0..5]OF LREAL;
+AxisStopDone:ARRAY[0..5]OF BOOL;
+AxisStopBusy:ARRAY[0..5]OF BOOL;
+AxisStopActive:ARRAY[0..5]OF BOOL;
+AxisStopCommandAborted:ARRAY[0..5]OF BOOL;
+AxisStopError:ARRAY[0..5]OF BOOL;
+AxisStopErrorID:ARRAY[0..5]OF UDINT;
+
+//MoveJOG
+MoveJOG:ARRAY[0..5]OF MC_Jog;
+JogFw:ARRAY[0..5]OF BOOL;
+JogBw:ARRAY[0..5]OF BOOL;
+JogMode:ARRAY[0..5]OF E_JogMode;
+JogPosition:ARRAY[0..5]OF LREAL;
+Jogvelocity:ARRAY[0..5]OF LREAL;
+JogAcceleration:ARRAY[0..5]OF LREAL;
+JogDeceleration:ARRAY[0..5]OF LREAL;
+JogJerk:ARRAY[0..5]OF LREAL;
+JogDone:ARRAY[0..5]OF BOOL;
+JogBusy:ARRAY[0..5]OF BOOL;
+JogActive:ARRAY[0..5]OF BOOL;
+JogCommandAborted:ARRAY[0..5]OF BOOL;
+JogError:ARRAY[0..5]OF BOOL;
+JogErrorID:ARRAY[0..5]OF UDINT;
+
+//Reset
+MC_Resrt_0: ARRAY[0..5] OF MC_Reset;
+AxisResetDone: ARRAY[0..5] OF BOOL;
+AxisResetTrigger: ARRAY[0..5] OF BOOL;
+AxisResetBusy: ARRAY[0..5] OF BOOL;
+AxisResetError: ARRAY[0..5] OF BOOL;
+AxisResetErrorID: ARRAY[0..5] OF UDINT;
+
+//HOME
+home_1: ARRAY[0..5] OF MC_HOME;
+Home_Done: ARRAY[0..5] OF BOOL;
+Home: ARRAY[0..5] OF BOOL;
+Home_Pos: ARRAY[0..5] OF LREAL;
+Home_Mode: ARRAY[0..5] OF MC_HomingMode;
+Home_cal: ARRAY[0..5] OF BOOL;
+Home_busy: ARRAY[0..5] OF BOOL;
+Home_Active: ARRAY[0..5] OF BOOL;
+Home_CommandAborted: ARRAY[0..5] OF BOOL;
+Home_Error: ARRAY[0..5] OF BOOL;
+Home_ErrorID: ARRAY[0..5] OF UDINT;
+	
+MoveA:ARRAY [0..5] OF LREAL;
+MoveAString:ARRAY [0..5] OF STRING;
+MoveString:ARRAY [0..5] OF STRING;
+	
+ExtPos AT%I*:ARRAY[0..5]OF LREAL;
+PosRun AT%I*:BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
