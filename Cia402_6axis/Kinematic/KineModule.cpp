@@ -178,7 +178,7 @@ HRESULT CKineModule::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG_PT
 		InData[i] = m_Inputs.InPos[i];//Inputs --> InData
 
 	////calc
-	for (int i = 0; i < 6; i++) InData[i] *= (PI / 180.0);//InData -- > Angle
+	//for (int i = 0; i < 6; i++) InData[i] *= (PI / 180.0);//InData -- > Angle
 	Theta Angle_Now(InData, InData + 6);
 
 	Theta Angle_Last(Angle_Now);//Angle_Now --> Angle_Last

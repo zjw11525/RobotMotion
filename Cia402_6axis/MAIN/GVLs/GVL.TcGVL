@@ -92,7 +92,7 @@ MoveAString:ARRAY [0..5] OF STRING;
 MoveString:ARRAY [0..5] OF STRING;
 	
 ExtPos AT%I*:ARRAY[0..5]OF LREAL;
-PosRun AT%I*:BOOL;
+PosRun AT%Q*:BOOL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
