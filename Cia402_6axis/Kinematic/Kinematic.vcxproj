@@ -45,6 +45,7 @@
     <ClInclude Include="KinematicDriver.h" />
     <ClInclude Include="KinematicInterfaces.h" />
     <ClInclude Include="KinematicServices.h" />
+    <ClInclude Include="Trajplanning.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Kinematic.cpp">
@@ -79,6 +80,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|TwinCAT RT (x64)'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|TwinCAT RT (x86)'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|TwinCAT RT (x64)'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Trajplanning.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|TwinCAT RT (x64)'">NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

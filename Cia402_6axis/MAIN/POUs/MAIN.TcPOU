@@ -7261,6 +7261,8 @@ CASE CurrentJob OF
 		MoveAString[4]:=LREAL_TO_STRING(MoveA[4]);
 		MoveAString[5]:=LREAL_TO_STRING(MoveA[5]);
 		
+		GVL.PosRun := FALSE;	
+		GVL.TrajRun:= FALSE;		
 		CurrentJobState:='Wait Command';
 	1://SetZero
 		Home[0]:=TRUE;Home[1]:=TRUE;Home[2]:=TRUE;
@@ -7293,24 +7295,23 @@ CASE CurrentJob OF
 			SetPointGenEnable[4].Enabled AND
 			SetPointGenEnable[5].Enabled THEN
 			GVL.PosRun := TRUE;	
-
 		
-			MC_ExtSetPointGenFeed(ExtPos[5],//Position:= Pos[i,5],//STRING_TO_LREAL(P_TextModeRead.database[i,5]),
+			MC_ExtSetPointGenFeed(Position:=ExtPos[0],//Position:= Pos[i,5],//STRING_TO_LREAL(P_TextModeRead.database[i,5]),
 				Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[0]);
 				
-			MC_ExtSetPointGenFeed(ExtPos[4],//Position:= Pos[i,4],//STRING_TO_LREAL(P_TextModeRead.database[i,4]),
+			MC_ExtSetPointGenFeed(Position:=-ExtPos[1],//Position:= Pos[i,4],//STRING_TO_LREAL(P_TextModeRead.database[i,4]),
 				Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[1]);
 				
-			MC_ExtSetPointGenFeed(ExtPos[3],//Position:= Pos[i,3],//STRING_TO_LREAL(P_TextModeRead.database[i,3]),
+			MC_ExtSetPointGenFeed(Position:=ExtPos[2],//Position:= Pos[i,3],//STRING_TO_LREAL(P_TextModeRead.database[i,3]),
 				Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[2]);
 				
-			MC_ExtSetPointGenFeed(ExtPos[2],//Position:= Pos[i,2],//STRING_TO_LREAL(P_TextModeRead.database[i,2]),
+			MC_ExtSetPointGenFeed(Position:=ExtPos[3],//Position:= Pos[i,2],//STRING_TO_LREAL(P_TextModeRead.database[i,2]),
 				Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[3]);
 				
-			MC_ExtSetPointGenFeed(ExtPos[1],//Position:= Pos[i,1],//STRING_TO_LREAL(P_TextModeRead.database[i,1]),
+			MC_ExtSetPointGenFeed(Position:=ExtPos[4],//Position:= Pos[i,1],//STRING_TO_LREAL(P_TextModeRead.database[i,1]),
 				Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[4]);
 				
-			MC_ExtSetPointGenFeed(ExtPos[0],//Position:= Pos[i,0],//STRING_TO_LREAL(P_TextModeRead.database[i,0]),
+			MC_ExtSetPointGenFeed(Position:=ExtPos[5],//Position:= Pos[i,0],//STRING_TO_LREAL(P_TextModeRead.database[i,0]),
 				Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[5]);
 		END_IF
 		setpositionGen();
@@ -7429,9 +7430,10 @@ CASE CurrentJob OF
 			CurrentJobState:='Axis Reset Doing';
 		END_IF
 	10://read csv
-		P_TextModeRead_ReadTrigger:=TRUE;
-		CurrentJobState:='Read CSV';
-		P_TextModeRead();
+		//P_TextModeRead_ReadTrigger:=TRUE;
+		//CurrentJobState:='Read CSV';
+		//P_TextModeRead();
+		GVL.TrajRun:= TRUE;	
 		CurrentJob:=0;
 	11://Move to origin
 		AxisMovePosition[0]:=0;AxisMovePosition[1]:=0;AxisMovePosition[2]:=0;

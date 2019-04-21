@@ -78,7 +78,7 @@
           <Symbol>
             <Name>PosRun</Name>
             <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
-          </Symbol>
+          </Symbol><Symbol><Name>TrajRun</Name><BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType></Symbol>
         </DataArea>
         <DataArea>
           <AreaNo AreaType="OutputSrc">1</AreaNo>

@@ -29,6 +29,7 @@ typedef struct _KineModuleInputs
 {
 	double InPos[6];
 	bool PosRun;
+	bool TrajRun;
 } KineModuleInputs, *PKineModuleInputs;
 #pragma pack(pop)
 
