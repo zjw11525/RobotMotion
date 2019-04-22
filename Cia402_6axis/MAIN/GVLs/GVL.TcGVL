@@ -2,8 +2,8 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4018.5">
   <GVL Name="GVL" Id="{c57c9985-bfd7-4fd7-88f8-55bc55ab230f}">
     <Declaration><![CDATA[VAR_GLOBAL CONSTANT
-	MAX_CSV_ROWS 			: UDINT := 7165;//1680;//hang
-	MAX_CSV_COLUMNS 		: UDINT := 5;//lie 0-5
+	MAX_CSV_ROWS 			: UDINT := 1;//1680;//hang
+	MAX_CSV_COLUMNS 		: UDINT := 3;//lie 0-5
 	MAX_CSV_FIELD_LENGTH	: UDINT := 20;
 END_VAR
 
@@ -94,6 +94,10 @@ MoveString:ARRAY [0..5] OF STRING;
 ExtPos AT%I*:ARRAY[0..5]OF LREAL;
 PosRun AT%Q*:BOOL;
 TrajRun AT%Q*:BOOL;
+OutActPos AT%Q*:ARRAY[0..5]OF LREAL;
+ExtPosOK AT%I*:BOOL;
+OutMovePos AT%Q*:ARRAY[0..2]OF LREAL;
+OutMovePosString :ARRAY[0..2]OF STRING;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

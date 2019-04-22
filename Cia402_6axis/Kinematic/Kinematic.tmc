@@ -72,13 +72,10 @@
           <Name>Inputs</Name>
           <ContextId>1</ContextId>
           <Symbol>
-            <Name>InPos</Name>
+            <Name>InAngle</Name>
             <BaseType GUID="{18071995-0000-0000-0000-00000000000e}">LREAL</BaseType><ArrayInfo><LBound>0</LBound><Elements>6</Elements></ArrayInfo>
           </Symbol>
-          <Symbol>
-            <Name>PosRun</Name>
-            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
-          </Symbol><Symbol><Name>TrajRun</Name><BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType></Symbol>
+          <Symbol><Name>InPos</Name><BaseType GUID="{18071995-0000-0000-0000-00000000000e}">LREAL</BaseType><ArrayInfo><LBound>0</LBound><Elements>3</Elements></ArrayInfo></Symbol><Symbol><Name>PosRun</Name><BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType></Symbol><Symbol><Name>TrajRun</Name><BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType></Symbol>
         </DataArea>
         <DataArea>
           <AreaNo AreaType="OutputSrc">1</AreaNo>
@@ -91,7 +88,7 @@
           <Symbol>
             <Name>OutAngle</Name>
             <BaseType GUID="{18071995-0000-0000-0000-00000000000e}">LREAL</BaseType><ArrayInfo><LBound>0</LBound><Elements>6</Elements></ArrayInfo>
-          </Symbol>
+          </Symbol><Symbol><Name>ExtPosOK</Name><BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType></Symbol>
         </DataArea>
       </DataAreas>
       <InterfacePointers>

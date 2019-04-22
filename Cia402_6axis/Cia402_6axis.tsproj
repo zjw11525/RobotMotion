@@ -2904,11 +2904,23 @@ External Setpoint Generation:
 							<Name>GVL.ExtPos</Name>
 							<Type>ARRAY [0..5] OF LREAL</Type>
 						</Var>
+						<Var>
+							<Name>GVL.ExtPosOK</Name>
+							<Type>BOOL</Type>
+						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
 						<Var>
+							<Name>GVL.OutMovePos</Name>
+							<Type>ARRAY [0..2] OF LREAL</Type>
+						</Var>
+						<Var>
 							<Name>GVL.PosRun</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.TrajRun</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -2936,8 +2948,8 @@ External Setpoint Generation:
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 						<Var>
-							<Name>GVL.TrajRun</Name>
-							<Type>BOOL</Type>
+							<Name>GVL.OutActPos</Name>
+							<Type>ARRAY [0..5] OF LREAL</Type>
 						</Var>
 					</Vars>
 					<TaskPouOids>
@@ -3023,9 +3035,9 @@ External Setpoint Generation:
 								<AreaNo AreaType="InputDst">0</AreaNo>
 								<Name>Inputs</Name>
 								<ContextId>1</ContextId>
-								<ByteSize>50</ByteSize>
+								<ByteSize>74</ByteSize>
 								<Symbol>
-									<Name>InPos</Name>
+									<Name>InAngle</Name>
 									<BitSize>384</BitSize>
 									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
 									<ArrayInfo>
@@ -3035,23 +3047,33 @@ External Setpoint Generation:
 									<BitOffs>0</BitOffs>
 								</Symbol>
 								<Symbol>
+									<Name>InPos</Name>
+									<BitSize>192</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<ArrayInfo>
+										<LBound>0</LBound>
+										<Elements>3</Elements>
+									</ArrayInfo>
+									<BitOffs>384</BitOffs>
+								</Symbol>
+								<Symbol>
 									<Name>PosRun</Name>
 									<BitSize>8</BitSize>
 									<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
-									<BitOffs>384</BitOffs>
+									<BitOffs>576</BitOffs>
 								</Symbol>
 								<Symbol>
 									<Name>TrajRun</Name>
 									<BitSize>8</BitSize>
 									<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
-									<BitOffs>392</BitOffs>
+									<BitOffs>584</BitOffs>
 								</Symbol>
 							</DataArea>
 							<DataArea>
 								<AreaNo AreaType="OutputSrc">1</AreaNo>
 								<Name>Outputs</Name>
 								<ContextId>1</ContextId>
-								<ByteSize>72</ByteSize>
+								<ByteSize>73</ByteSize>
 								<Symbol>
 									<Name>OutPos</Name>
 									<BitSize>192</BitSize>
@@ -3071,6 +3093,12 @@ External Setpoint Generation:
 										<Elements>6</Elements>
 									</ArrayInfo>
 									<BitOffs>192</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>ExtPosOK</Name>
+									<BitSize>8</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+									<BitOffs>576</BitOffs>
 								</Symbol>
 							</DataArea>
 						</DataAreas>
@@ -3548,12 +3576,22 @@ External Setpoint Generation:
 				<Link VarA="PlcTask Outputs^GVL.Axis[5].PlcToNc" VarB="Inputs^FromPlc"/>
 			</OwnerB>
 			<OwnerB Name="TIXC^Kinematic^Kinematic_Obj1 (CKineModule)">
-				<Link VarA="PlcTask Inputs^GVL.ExtPos[0]" VarB="Outputs^OutAngle[0]"/>
-				<Link VarA="PlcTask Inputs^GVL.ExtPos[1]" VarB="Outputs^OutAngle[1]"/>
-				<Link VarA="PlcTask Inputs^GVL.ExtPos[2]" VarB="Outputs^OutAngle[2]"/>
-				<Link VarA="PlcTask Inputs^GVL.ExtPos[3]" VarB="Outputs^OutAngle[3]"/>
-				<Link VarA="PlcTask Inputs^GVL.ExtPos[4]" VarB="Outputs^OutAngle[4]"/>
-				<Link VarA="PlcTask Inputs^GVL.ExtPos[5]" VarB="Outputs^OutAngle[5]"/>
+				<Link VarA="PlcTask Inputs^GVL.ExtPosOK" VarB="Outputs^ExtPosOK"/>
+				<Link VarA="PlcTask Inputs^GVL.ExtPos[0]" VarB="Outputs^OutAngle[5]"/>
+				<Link VarA="PlcTask Inputs^GVL.ExtPos[1]" VarB="Outputs^OutAngle[4]"/>
+				<Link VarA="PlcTask Inputs^GVL.ExtPos[2]" VarB="Outputs^OutAngle[3]"/>
+				<Link VarA="PlcTask Inputs^GVL.ExtPos[3]" VarB="Outputs^OutAngle[2]"/>
+				<Link VarA="PlcTask Inputs^GVL.ExtPos[4]" VarB="Outputs^OutAngle[1]"/>
+				<Link VarA="PlcTask Inputs^GVL.ExtPos[5]" VarB="Outputs^OutAngle[0]"/>
+				<Link VarA="PlcTask Outputs^GVL.OutActPos[0]" VarB="Inputs^InAngle[5]"/>
+				<Link VarA="PlcTask Outputs^GVL.OutActPos[1]" VarB="Inputs^InAngle[4]"/>
+				<Link VarA="PlcTask Outputs^GVL.OutActPos[2]" VarB="Inputs^InAngle[3]"/>
+				<Link VarA="PlcTask Outputs^GVL.OutActPos[3]" VarB="Inputs^InAngle[2]"/>
+				<Link VarA="PlcTask Outputs^GVL.OutActPos[4]" VarB="Inputs^InAngle[1]"/>
+				<Link VarA="PlcTask Outputs^GVL.OutActPos[5]" VarB="Inputs^InAngle[0]"/>
+				<Link VarA="PlcTask Outputs^GVL.OutMovePos[0]" VarB="Inputs^InPos[0]"/>
+				<Link VarA="PlcTask Outputs^GVL.OutMovePos[1]" VarB="Inputs^InPos[1]"/>
+				<Link VarA="PlcTask Outputs^GVL.OutMovePos[2]" VarB="Inputs^InPos[2]"/>
 				<Link VarA="PlcTask Outputs^GVL.PosRun" VarB="Inputs^PosRun"/>
 				<Link VarA="PlcTask Outputs^GVL.TrajRun" VarB="Inputs^TrajRun"/>
 			</OwnerB>
