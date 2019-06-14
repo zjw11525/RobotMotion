@@ -136,6 +136,10 @@ CASE CurrentJob OF
 			GVL.PosRun := TRUE;	
 			
 			IF(GVL.ExtPosOK = TRUE) THEN
+				SetPointGenDisable[0].Execute:=TRUE;SetPointGenDisable[1].Execute:=TRUE;		
+				SetPointGenDisable[2].Execute:=TRUE;SetPointGenDisable[3].Execute:=TRUE;		
+				SetPointGenDisable[4].Execute:=TRUE;SetPointGenDisable[5].Execute:=TRUE;	
+				setpositionGen();
 				CurrentJob:=0;
 			END_IF
 			

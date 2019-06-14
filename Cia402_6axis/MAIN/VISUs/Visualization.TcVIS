@@ -9261,7 +9261,7 @@ MAIN.CurrentJob:=0;"</v>
                     <v n="VisualElementIdentifier">"GenElemInst_208"</v>
                     <n n="VisualElementOfflinePaintCommands" />
                     <n n="VisualElementFrameInformation" />
-                    <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                    <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
                       <v>OnMouseClick</v>
                       <a cet="STSnippetInputAction">
                         <o>
@@ -10547,7 +10547,7 @@ MAIN.CurrentJob:=0;"</v>
                     <v n="VisualElementIdentifier">"GenElemInst_212"</v>
                     <n n="VisualElementOfflinePaintCommands" />
                     <n n="VisualElementFrameInformation" />
-                    <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                    <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="InputBoxInputAction[]">
                       <v>OnMouseClick</v>
                       <a cet="InputBoxInputAction">
                         <o>
@@ -11030,7 +11030,7 @@ MAIN.CurrentJob:=0;"</v>
                     <v n="VisualElementIdentifier">"GenElemInst_218"</v>
                     <n n="VisualElementOfflinePaintCommands" />
                     <n n="VisualElementFrameInformation" />
-                    <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                    <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="InputBoxInputAction[]">
                       <v>OnMouseClick</v>
                       <a cet="InputBoxInputAction">
                         <o>
@@ -11191,7 +11191,7 @@ MAIN.CurrentJob:=0;"</v>
                     <v n="VisualElementIdentifier">"GenElemInst_220"</v>
                     <n n="VisualElementOfflinePaintCommands" />
                     <n n="VisualElementFrameInformation" />
-                    <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                    <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="InputBoxInputAction[]">
                       <v>OnMouseClick</v>
                       <a cet="InputBoxInputAction">
                         <o>
@@ -11352,7 +11352,7 @@ MAIN.CurrentJob:=0;"</v>
                     <v n="VisualElementIdentifier">"GenElemInst_222"</v>
                     <n n="VisualElementOfflinePaintCommands" />
                     <n n="VisualElementFrameInformation" />
-                    <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                    <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="InputBoxInputAction[]">
                       <v>OnMouseClick</v>
                       <a cet="InputBoxInputAction">
                         <o>
@@ -12227,7 +12227,7 @@ MAIN.CurrentJob:=0;"</v>
                     <v n="VisualElementIdentifier">"GenElemInst_196"</v>
                     <n n="VisualElementOfflinePaintCommands" />
                     <n n="VisualElementFrameInformation" />
-                    <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                    <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
                       <v>OnMouseClick</v>
                       <a cet="STSnippetInputAction">
                         <o>
@@ -12386,7 +12386,7 @@ MAIN.CurrentJob:=0;"</v>
                     <v n="VisualElementIdentifier">"GenElemInst_198"</v>
                     <n n="VisualElementOfflinePaintCommands" />
                     <n n="VisualElementFrameInformation" />
-                    <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="IInputAction[]">
+                    <d n="VisualElementInputActions" t="Hashtable" ckt="String" cvt="STSnippetInputAction[]">
                       <v>OnMouseClick</v>
                       <a cet="STSnippetInputAction">
                         <o>
@@ -13680,10 +13680,10 @@ MoveAString[5]:='0';"</v>
               <d n="FbMethods" t="CaseInsensitiveHashtable" ckt="String" cvt="Guid">
                 <v>FB_Init</v>
                 <v>12c62033-eae4-4095-9bf7-d7d20953e609</v>
-                <v>FB_Reinit</v>
-                <v>dbe9516a-751f-4c6a-a9ab-4d77a73e422f</v>
                 <v>FB_Exit</v>
                 <v>fd5ccc80-73f3-48fa-838b-8d818e825d98</v>
+                <v>FB_Reinit</v>
+                <v>dbe9516a-751f-4c6a-a9ab-4d77a73e422f</v>
               </d>
               <v n="FbName">"NotImportant"</v>
               <v n="FbGuid">{0425ed4c-a5db-4051-953f-74832dc97d75}</v>
@@ -13775,7 +13775,6 @@ MoveAString[5]:='0';"</v>
         <Type n="Guid">System.Guid</Type>
         <Type n="Hashtable">System.Collections.Hashtable</Type>
         <Type n="HotkeyConfiguration">{6b108d46-58af-4e41-a3f4-174d8f160cc4}</Type>
-        <Type n="IInputAction[]">_3S.CoDeSys.VisualElem.IInputAction[], VisualElem, Version=3.5.6.0, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="InputBoxInputAction">{e8e7e747-f76f-4dee-ab1c-b9637e41ac26}</Type>
         <Type n="InputBoxInputAction[]">_3S.CoDeSys.VisualElem.InputBoxInputAction[], VisualElem.plugin, Version=3.5.6.10, Culture=neutral, PublicKeyToken=null</Type>
         <Type n="Int16">System.Int16</Type>

@@ -2607,6 +2607,10 @@ External Setpoint Generation:
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
+							<Name>GVL.ExtPosOK</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>GVL.Axis[0].NcToPlc</Name>
 							<Type GUID="{6A65C767-34E5-42BF-AD87-E1A503EAC7BE}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 							<SubVar>
@@ -2904,17 +2908,9 @@ External Setpoint Generation:
 							<Name>GVL.ExtPos</Name>
 							<Type>ARRAY [0..5] OF LREAL</Type>
 						</Var>
-						<Var>
-							<Name>GVL.ExtPosOK</Name>
-							<Type>BOOL</Type>
-						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>GVL.OutMovePos</Name>
-							<Type>ARRAY [0..2] OF LREAL</Type>
-						</Var>
 						<Var>
 							<Name>GVL.PosRun</Name>
 							<Type>BOOL</Type>
@@ -2950,6 +2946,10 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL.OutActPos</Name>
 							<Type>ARRAY [0..5] OF LREAL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.OutMovePos</Name>
+							<Type>ARRAY [0..2] OF LREAL</Type>
 						</Var>
 					</Vars>
 					<TaskPouOids>
