@@ -181,11 +181,11 @@ HRESULT CKineModule::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG_PT
 	if (m_Inputs.PosRun == false)
 	{
 		for (int i = 0; i < 6; i++)
-			InData[i] = m_Inputs.InAngle[i] / Ratio[i];//Inputs --> InData
+			InData[i] = m_Inputs.InAngle[i] / Ratio[i] * 2;//Inputs --> InData
 		
 		Theta Angle_Now(6,0);
 		for (int i = 0; i < 6; i++)
-			Angle_Now[i] = InData[i] * 0.03491;//InData -- > Angle
+			Angle_Now[i] = InData[i] * 0.017453;//InData -- > Angle
 
 		Angle_Last = Angle_Now;//Angle_Now --> Angle_Last
 
@@ -199,19 +199,21 @@ HRESULT CKineModule::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG_PT
 	{
 		if ((m_counter < SizeData)&&(m_Outputs.ExtPosOK == false))
 		{		
-			T2 = T;
-			T2[0][3] = DataBase[0][m_counter];
-			T2[1][3] = DataBase[1][m_counter];
-			T2[2][3] = DataBase[2][m_counter];
-			m_counter++;
-			Theta outangle(6, 0);
-			outangle = kine.Ikine_Step(T2, Angle_Last);
+			//T2 = T;
+			//T2[0][3] = DataBase[0][m_counter];
+			//T2[1][3] = DataBase[1][m_counter];
+			//T2[2][3] = DataBase[2][m_counter];
+
+			//Theta outangle(6, 0);
+			//outangle = kine.Ikine_Step(T2, Angle_Last);
 
 			for (int i = 0; i < 6; i++)
 			{
-				OutData[i] = outangle[i] * 28.6479;//0->5底座到抓手
-				m_Outputs.OutAngle[i] = OutData[i] * Ratio[i];
+				//OutData[i] = outangle[i] * 28.6479;//0->5底座到抓手
+				OutData[i] = DataBase[i][m_counter];
+				m_Outputs.OutAngle[i] = OutData[i] * Ratio[i] / 2;
 			}
+			m_counter++;
 		}
 		else 
 		{			
@@ -222,18 +224,26 @@ HRESULT CKineModule::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG_PT
 
 	if (m_Inputs.TrajRun == true)
 	{
-		T1 = T;
-		T1[0][3] = m_Inputs.InPos[0];
-		T1[1][3] = m_Inputs.InPos[1];
-		T1[2][3] = m_Inputs.InPos[2];
-		double L = sqrt_(pow_(T1[0][3], 2) + pow_(T1[1][3], 2) + pow_(T1[2][3], 2));//运动距离
-		SizeData = ceil_(L / (0.2*0.001)) + 1;//计算插补数量
+		//T1 = T;
+		//T1[0][3] = m_Inputs.InPos[0];
+		//T1[1][3] = m_Inputs.InPos[1];
+		//T1[2][3] = m_Inputs.InPos[2];
+		//double L = sqrt_(pow_(T1[0][3], 2) + pow_(T1[1][3], 2) + pow_(T1[2][3], 2));//运动距离
 
-		DataBase = traj.MoveLine(T, T1, 0.2, 0.1, 0.001);
+		double xtrans = 0 - T[0][3];
+		double ytrans = 0.5 - T[1][3];
+		double ztrans = 0.3 - T[2][3];
+		double L = sqrt_(pow_(xtrans, 2) + pow_(ytrans, 2) + pow_(ztrans, 2)); //distance
+
+		SizeData = ceil_(L / (0.2*0.001));//计算插补数量
+
+		Theta Q_Start(InData, InData + 6);
+		//DataBase = traj.MoveLine(T, T1, 0.2, 0.3, 0.001);
+		DataBase = traj.CartesianMove(0, 0.5, 0.3, Q_Start, T, 0.2, 0.5, 0.001);
+
 		m_Outputs.ExtPosOK = false;
 		m_counter = 0;
 	}
-
 
 	return hr;
 }
