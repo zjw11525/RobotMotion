@@ -226,6 +226,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"91"</v>
+              <v n="TextDefault">"X:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"81"</v>
               <v n="TextDefault">"X增量"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -236,6 +241,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"92"</v>
+              <v n="TextDefault">"Y:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"82"</v>
               <v n="TextDefault">"Y增量"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -243,6 +253,11 @@
             <o>
               <v n="TextID">"84"</v>
               <v n="TextDefault">"Y增量:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"93"</v>
+              <v n="TextDefault">"Z:"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -276,6 +291,16 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"97"</v>
+              <v n="TextDefault">"关节插补"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"99"</v>
+              <v n="TextDefault">"关节规划"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"58"</v>
               <v n="TextDefault">"初始化A点"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -303,6 +328,31 @@
             <o>
               <v n="TextID">"60"</v>
               <v n="TextDefault">"定零点"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"86"</v>
+              <v n="TextDefault">"实时位置"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"87"</v>
+              <v n="TextDefault">"实时坐标X:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"88"</v>
+              <v n="TextDefault">"实时坐标Y:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"89"</v>
+              <v n="TextDefault">"实时坐标Z:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"94"</v>
+              <v n="TextDefault">"平移增量"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -371,8 +421,28 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"90"</v>
+              <v n="TextDefault">"直线运动X增量:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"96"</v>
+              <v n="TextDefault">"笛卡尔规划"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"95"</v>
+              <v n="TextDefault">"绝对位置"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"24"</v>
               <v n="TextDefault">"表格"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"98"</v>
+              <v n="TextDefault">"规划"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>

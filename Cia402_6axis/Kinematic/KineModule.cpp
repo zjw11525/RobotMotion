@@ -175,74 +175,126 @@ HRESULT CKineModule::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG_PT
 	HRESULT hr = S_OK;
 	Kinematic kine;
 	Trajplanning traj;
-	double Ratio[6] = { 121.0, 160.68, 101.81, 99.69, 64.56, 49.99 };//底座->抓手//{ 49.99, 64.56, 99.69, 101.81, 160.68, 121.0 };
-
-
-	if (m_Inputs.PosRun == false)
+	Theta Angle_Now(6, 0);
+	Theta Angle_Now_Arc(6, 0);
+	Theta Angle_Last_Arc(6, 0);
+	switch (m_Inputs.KineModlueJob)
 	{
-		for (int i = 0; i < 6; i++)
-			InData[i] = m_Inputs.InAngle[i] / Ratio[i] * 2;//Inputs --> InData
-		
-		Theta Angle_Now(6,0);
-		for (int i = 0; i < 6; i++)
-			Angle_Now[i] = InData[i] * 0.017453;//InData -- > Angle
-
-		Angle_Last = Angle_Now;//Angle_Now --> Angle_Last
-
-		T = kine.Fkine_Step(Angle_Now);
-
-		for (int i = 0; i < 3; i++)
-			m_Outputs.OutPos[i] = T[i][3];
-	}
-
-	if (m_Inputs.PosRun == true)
-	{
-		if ((m_counter < SizeData)&&(m_Outputs.ExtPosOK == false))
-		{		
-			//T2 = T;
-			//T2[0][3] = DataBase[0][m_counter];
-			//T2[1][3] = DataBase[1][m_counter];
-			//T2[2][3] = DataBase[2][m_counter];
-
-			//Theta outangle(6, 0);
-			//outangle = kine.Ikine_Step(T2, Angle_Last);
+		case 0://Module_Idle
+		{
+			for (int i = 0; i < 6; i++)
+				Angle_Now[i] = m_Inputs.InAngle[i];//从PLC拿到实时角度
 
 			for (int i = 0; i < 6; i++)
+				Angle_Now_Arc[i] = Angle_Now[i] * 0.017453;//转到弧度
+
+			for (int i = 0; i < 6; i++)
+				m_Outputs.OutAngle[i] = Angle_Now[i];//保持当前关节量不变
+
+			Angle_Last_Arc = Angle_Now_Arc;
+
+			PoseArrayNow = kine.Fkine_Step(Angle_Now_Arc);//反解出实时位置
+
+			for (int i = 0; i < 3; i++)
+				m_Outputs.Pos_Now[i] = PoseArrayNow[i][3];
+
+			m_Outputs.ExtPosOK = false;
+			m_Outputs.ExtPosReady = false;
+			m_counter = 0;
+		}break;
+		case 1://CartesianMovePlanning
+		{
+			for (int i = 0; i < 6; i++)
+				Angle_Now[i] = m_Inputs.InAngle[i];//从PLC拿到实时角度
+			for (int i = 0; i < 6; i++)
+				m_Outputs.OutAngle[i] = Angle_Now[i];//保持当前关节量不变
+
+			double xtrans = 0   - PoseArrayNow[0][3];
+			double ytrans = 0.5 - PoseArrayNow[1][3];
+			double ztrans = 0.3 - PoseArrayNow[2][3];
+			double L = sqrt_(pow_(xtrans, 2) + pow_(ytrans, 2) + pow_(ztrans, 2)); //distance
+
+			SizeData = ceil_(L / (0.2*0.001));//计算插补数量
+
+			DataBase = traj.CartesianMove(0, 0.5, 0.3, Angle_Now, PoseArrayNow, 0.2, 0.5, 0.001);
+
+			CTrajOK = true;
+			m_Outputs.ExtPosOK = false;
+			m_Outputs.ExtPosReady = false;
+			m_counter = 0;
+			m_Inputs.KineModlueJob = 0;//back to idle
+		}break;
+		case 2://LineMovePlanning
+		{
+			T1 = PoseArrayNow;
+			T1[0][3] = m_Inputs.InPos[0];
+			T1[1][3] = m_Inputs.InPos[1];
+			T1[2][3] = m_Inputs.InPos[2];
+			double L = sqrt_(pow_(T1[0][3], 2) + pow_(T1[1][3], 2) + pow_(T1[2][3], 2));//运动距离
+
+			SizeData = ceil_(L / (0.2*0.001));//计算插补数量
+
+			if (SizeData > 0)
 			{
-				//OutData[i] = outangle[i] * 28.6479;//0->5底座到抓手
-				OutData[i] = DataBase[i][m_counter];
-				m_Outputs.OutAngle[i] = OutData[i] * Ratio[i] / 2;
+				DataBase1 = traj.MoveLine(PoseArrayNow, T1, 0.2, 0.3, 0.001);
+
+				LineTrajOK = true;			
 			}
-			m_counter++;
-		}
-		else 
-		{			
-			m_Outputs.ExtPosOK = true;
-		}
-	}
 
+			m_Outputs.ExtPosOK = false;
+			m_Outputs.ExtPosReady = false;
+			m_counter = 0;
+			m_Inputs.KineModlueJob = 0;//back to idle
+		}break;
+		case 3://CartesianMove
+		{
+			if ((m_counter < SizeData) && (m_Outputs.ExtPosOK == false) && (CTrajOK == true))
+			{
+				for (int i = 0; i < 6; i++)
+				{
+					m_Outputs.OutAngle[i] = DataBase[i][m_counter];
+				}
+				m_counter++;
+				m_Outputs.ExtPosReady = true;
+			}
+			else
+			{
+				CTrajOK = false;
+				m_Outputs.ExtPosOK = true;
+				m_Outputs.ExtPosReady = false;
+				m_Inputs.KineModlueJob = 0;//back to idle
+			}
+		}break;
+		case 4://LineMove
+		{
+			if ((m_counter < SizeData) && (m_Outputs.ExtPosOK == false) && (LineTrajOK == true))
+			{
+				T2 = PoseArrayNow;
+				T2[0][3] = DataBase1[0][m_counter];
+				T2[1][3] = DataBase1[1][m_counter];
+				T2[2][3] = DataBase1[2][m_counter];
 
-	if (m_Inputs.TrajRun == true)
-	{
-		//T1 = T;
-		//T1[0][3] = m_Inputs.InPos[0];
-		//T1[1][3] = m_Inputs.InPos[1];
-		//T1[2][3] = m_Inputs.InPos[2];
-		//double L = sqrt_(pow_(T1[0][3], 2) + pow_(T1[1][3], 2) + pow_(T1[2][3], 2));//运动距离
+				Theta outangle(6, 0);
+				outangle = kine.Ikine_Step(T2, Angle_Last_Arc);
+				Angle_Last_Arc = outangle;
 
-		double xtrans = 0 - T[0][3];
-		double ytrans = 0.5 - T[1][3];
-		double ztrans = 0.3 - T[2][3];
-		double L = sqrt_(pow_(xtrans, 2) + pow_(ytrans, 2) + pow_(ztrans, 2)); //distance
-
-		SizeData = ceil_(L / (0.2*0.001));//计算插补数量
-
-		Theta Q_Start(InData, InData + 6);
-		//DataBase = traj.MoveLine(T, T1, 0.2, 0.3, 0.001);
-		DataBase = traj.CartesianMove(0, 0.5, 0.3, Q_Start, T, 0.2, 0.5, 0.001);
-
-		m_Outputs.ExtPosOK = false;
-		m_counter = 0;
+				for (int i = 0; i < 6; i++)
+				{
+					m_Outputs.OutAngle[i] = outangle[i] * 57.3;
+				}
+				m_counter++;
+				m_Outputs.ExtPosReady = true;
+			}
+			else
+			{
+				LineTrajOK = false;
+				m_Outputs.ExtPosOK = true;
+				m_Outputs.ExtPosReady = false;
+				m_Inputs.KineModlueJob = 0;//back to idle
+			}
+		}break;
+		default:
+		break;
 	}
 
 	return hr;

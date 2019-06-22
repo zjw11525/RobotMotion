@@ -2908,16 +2908,20 @@ External Setpoint Generation:
 							<Name>GVL.ExtPos</Name>
 							<Type>ARRAY [0..5] OF LREAL</Type>
 						</Var>
+						<Var>
+							<Name>GVL.ExtPosReady</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.Pos_Now</Name>
+							<Type>ARRAY [0..2] OF LREAL</Type>
+						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>GVL.PosRun</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL.TrajRun</Name>
-							<Type>BOOL</Type>
+							<Name>GVL.KineModuleJob</Name>
+							<Type>INT</Type>
 						</Var>
 						<Var>
 							<Name>GVL.Axis[0].PlcToNc</Name>
@@ -3057,25 +3061,19 @@ External Setpoint Generation:
 									<BitOffs>384</BitOffs>
 								</Symbol>
 								<Symbol>
-									<Name>PosRun</Name>
-									<BitSize>8</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+									<Name>KineModlueJob</Name>
+									<BitSize>16</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType>
 									<BitOffs>576</BitOffs>
-								</Symbol>
-								<Symbol>
-									<Name>TrajRun</Name>
-									<BitSize>8</BitSize>
-									<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
-									<BitOffs>584</BitOffs>
 								</Symbol>
 							</DataArea>
 							<DataArea>
 								<AreaNo AreaType="OutputSrc">1</AreaNo>
 								<Name>Outputs</Name>
 								<ContextId>1</ContextId>
-								<ByteSize>73</ByteSize>
+								<ByteSize>74</ByteSize>
 								<Symbol>
-									<Name>OutPos</Name>
+									<Name>Pos_Now</Name>
 									<BitSize>192</BitSize>
 									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
 									<ArrayInfo>
@@ -3099,6 +3097,12 @@ External Setpoint Generation:
 									<BitSize>8</BitSize>
 									<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
 									<BitOffs>576</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>ExtPosReady</Name>
+									<BitSize>8</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+									<BitOffs>584</BitOffs>
 								</Symbol>
 							</DataArea>
 						</DataAreas>
@@ -3577,12 +3581,17 @@ External Setpoint Generation:
 			</OwnerB>
 			<OwnerB Name="TIXC^Kinematic^Kinematic_Obj1 (CKineModule)">
 				<Link VarA="PlcTask Inputs^GVL.ExtPosOK" VarB="Outputs^ExtPosOK"/>
+				<Link VarA="PlcTask Inputs^GVL.ExtPosReady" VarB="Outputs^ExtPosReady"/>
 				<Link VarA="PlcTask Inputs^GVL.ExtPos[0]" VarB="Outputs^OutAngle[5]"/>
 				<Link VarA="PlcTask Inputs^GVL.ExtPos[1]" VarB="Outputs^OutAngle[4]"/>
 				<Link VarA="PlcTask Inputs^GVL.ExtPos[2]" VarB="Outputs^OutAngle[3]"/>
 				<Link VarA="PlcTask Inputs^GVL.ExtPos[3]" VarB="Outputs^OutAngle[2]"/>
 				<Link VarA="PlcTask Inputs^GVL.ExtPos[4]" VarB="Outputs^OutAngle[1]"/>
 				<Link VarA="PlcTask Inputs^GVL.ExtPos[5]" VarB="Outputs^OutAngle[0]"/>
+				<Link VarA="PlcTask Inputs^GVL.Pos_Now[0]" VarB="Outputs^Pos_Now[0]"/>
+				<Link VarA="PlcTask Inputs^GVL.Pos_Now[1]" VarB="Outputs^Pos_Now[1]"/>
+				<Link VarA="PlcTask Inputs^GVL.Pos_Now[2]" VarB="Outputs^Pos_Now[2]"/>
+				<Link VarA="PlcTask Outputs^GVL.KineModuleJob" VarB="Inputs^KineModlueJob"/>
 				<Link VarA="PlcTask Outputs^GVL.OutActPos[0]" VarB="Inputs^InAngle[5]"/>
 				<Link VarA="PlcTask Outputs^GVL.OutActPos[1]" VarB="Inputs^InAngle[4]"/>
 				<Link VarA="PlcTask Outputs^GVL.OutActPos[2]" VarB="Inputs^InAngle[3]"/>

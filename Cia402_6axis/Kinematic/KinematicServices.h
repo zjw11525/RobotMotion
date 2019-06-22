@@ -29,17 +29,17 @@ typedef struct _KineModuleInputs
 {
 	double InAngle[6];
 	double InPos[3];
-	bool PosRun;
-	bool TrajRun;
+	SHORT KineModlueJob;
 } KineModuleInputs, *PKineModuleInputs;
 #pragma pack(pop)
 
 #pragma pack(push,1)
 typedef struct _KineModuleOutputs
 {
-	double OutPos[3];
+	double Pos_Now[3];
 	double OutAngle[6];
 	bool ExtPosOK;
+	bool ExtPosReady;
 } KineModuleOutputs, *PKineModuleOutputs;
 #pragma pack(pop)
 

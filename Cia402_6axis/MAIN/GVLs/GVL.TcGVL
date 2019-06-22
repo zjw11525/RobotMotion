@@ -88,16 +88,16 @@ Home_Error: ARRAY[0..5] OF BOOL;
 Home_ErrorID: ARRAY[0..5] OF UDINT;
 	
 MoveA:ARRAY [0..5] OF LREAL;
-MoveAString:ARRAY [0..5] OF STRING;
-MoveString:ARRAY [0..5] OF STRING;
-	
+MoveAString:ARRAY [0..5] OF STRING := ['0','0','0','0','0','0'];
+
 ExtPos AT%I*:ARRAY[0..5]OF LREAL;
-PosRun AT%Q*:BOOL;
-TrajRun AT%Q*:BOOL;
 OutActPos AT%Q*:ARRAY[0..5]OF LREAL;
+ExtPosReady AT%I*:BOOL;
 ExtPosOK AT%I*:BOOL;
 OutMovePos AT%Q*:ARRAY[0..2]OF LREAL;
-OutMovePosString :ARRAY[0..2]OF STRING;
+OutMovePosString:ARRAY[0..2]OF STRING := ['0','0','0'];
+KineModuleJob AT%Q*:INT:=0;
+Pos_Now AT%I*:ARRAY[0..2]OF LREAL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
