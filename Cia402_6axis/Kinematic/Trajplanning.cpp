@@ -192,14 +192,13 @@ Array Trajplanning::CartesianMove(double PositionX, double PositionY, double Pos
 	for (int i = 0; i < 6; i++) q_zero[i] *= (PI / 180.0);
 
 	Theta Q_zero(q_zero, q_zero + 6); //底座->抓手
-	Theta Angle_Last = Q_zero;
 
 	Array pose_start = kine.Fkine_Step(Q_zero); //正解
 	Array pose_end = pose_start;
 	//位置
-	pose_end[0][3] = PositionX;//0.3;
-	pose_end[1][3] = PositionY;//-0.5;
-	pose_end[2][3] = PositionZ;//0.2;
+	pose_end[0][3] = PositionX;
+	pose_end[1][3] = PositionY;
+	pose_end[2][3] = PositionZ;
 	double xtrans = pose_end[0][3] - T_Start[0][3];
 	double ytrans = pose_end[1][3] - T_Start[1][3];
 	double ztrans = pose_end[2][3] - T_Start[2][3];
@@ -209,7 +208,7 @@ Array Trajplanning::CartesianMove(double PositionX, double PositionY, double Pos
 
 	double L = sqrt_(pow_(xtrans, 2) + pow_(ytrans, 2) + pow_(ztrans, 2)); //distance
 	int N = ceil_(L / (Velocity * t));//计算插补数量
-	vector<double> s = SineGen(Velocity, AccelerationTime, N, t);;
+	vector<double> s = SineGen(Velocity, AccelerationTime, N, t);
 
 	Array qout(6, vector<double>(N, 0));
 
@@ -220,7 +219,7 @@ Array Trajplanning::CartesianMove(double PositionX, double PositionY, double Pos
 		qout[2][i] = Q_Start[2] + (Q_End[2] - Q_Start[2]) * s[i];
 		qout[3][i] = Q_Start[3] + (Q_End[3] - Q_Start[3]) * s[i];
 		qout[4][i] = Q_Start[4] + (Q_End[4] - Q_Start[4]) * s[i];
-		qout[5][i] = Q_Start[5] + (Q_End[5] - Q_Start[5]) * s[i];
+		qout[5][i] = -Q_Start[5] - (Q_End[5] - Q_Start[5]) * s[i];
 	}
 
 	return qout;

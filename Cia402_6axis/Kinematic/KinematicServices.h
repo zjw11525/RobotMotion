@@ -30,6 +30,9 @@ typedef struct _KineModuleInputs
 	double InAngle[6];
 	double InPos[3];
 	SHORT KineModlueJob;
+	double CPos[3];
+	double LineSpeed;
+	double CSpeed;
 } KineModuleInputs, *PKineModuleInputs;
 #pragma pack(pop)
 

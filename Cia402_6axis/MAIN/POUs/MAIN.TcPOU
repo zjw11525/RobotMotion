@@ -40,16 +40,21 @@ ELSE
 	DEFAULT_CSV_FIELD_SEP := 16#3B;(* Semicolon ASCII code *)
 END_IF
 
+GVL.LineMoveSpeed:=STRING_TO_LREAL(GVL.LineMoveSpeedString);
+GVL.CMoveSpeed:=STRING_TO_LREAL(GVL.CMoveSpeedString);
 GVL.OutMovePos[0]:=STRING_TO_LREAL(GVL.OutMovePosString[0]);
 GVL.OutMovePos[1]:=STRING_TO_LREAL(GVL.OutMovePosString[1]);
 GVL.OutMovePos[2]:=STRING_TO_LREAL(GVL.OutMovePosString[2]);
+GVL.OutCMovePos[0]:=STRING_TO_LREAL(GVL.OutCMovePosString[0]);
+GVL.OutCMovePos[1]:=STRING_TO_LREAL(GVL.OutCMovePosString[1]);
+GVL.OutCMovePos[2]:=STRING_TO_LREAL(GVL.OutCMovePosString[2]);
 GVL.MoveA[0]:=STRING_TO_LREAL(GVL.MoveAString[0])*24.995;
 GVL.MoveA[1]:=STRING_TO_LREAL(GVL.MoveAString[1])*32.28;
 GVL.MoveA[2]:=STRING_TO_LREAL(GVL.MoveAString[2])*49.845;
 GVL.MoveA[3]:=STRING_TO_LREAL(GVL.MoveAString[3])*50.905;
 GVL.MoveA[4]:=STRING_TO_LREAL(GVL.MoveAString[4])*80.34;
 GVL.MoveA[5]:=STRING_TO_LREAL(GVL.MoveAString[5])*60.5;
-GVL.OutActPos[0]:=GVL.Axis[0].NcToPlc.ActPos/24.995;
+GVL.OutActPos[0]:=-GVL.Axis[0].NcToPlc.ActPos/24.995;
 GVL.OutActPos[1]:=-GVL.Axis[1].NcToPlc.ActPos/32.28;
 GVL.OutActPos[2]:=GVL.Axis[2].NcToPlc.ActPos/49.845;
 GVL.OutActPos[3]:=GVL.Axis[3].NcToPlc.ActPos/50.905;
@@ -57,7 +62,7 @@ GVL.OutActPos[4]:=GVL.Axis[4].NcToPlc.ActPos/80.34;
 GVL.OutActPos[5]:=GVL.Axis[5].NcToPlc.ActPos/60.5;
 
 IF GVL.ExtPosReady = FALSE THEN	
-MC_ExtSetPointGenFeed(Position:=GVL.OutActPos[0]*24.995,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[0]);	
+MC_ExtSetPointGenFeed(Position:=-GVL.OutActPos[0]*24.995,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[0]);	
 MC_ExtSetPointGenFeed(Position:=-GVL.OutActPos[1]*32.28,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[1]);		
 MC_ExtSetPointGenFeed(Position:=GVL.OutActPos[2]*49.845,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[2]);		
 MC_ExtSetPointGenFeed(Position:=GVL.OutActPos[3]*50.905,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[3]);		
@@ -152,7 +157,7 @@ CASE CurrentJob OF
 			
 			GVL.KineModuleJob:=4;
 			IF GVL.ExtPosReady THEN
-			MC_ExtSetPointGenFeed(Position:=ExtPos[0]*24.995,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[0]);
+			MC_ExtSetPointGenFeed(Position:=-ExtPos[0]*24.995,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[0]);
 			
 			MC_ExtSetPointGenFeed(Position:=-ExtPos[1]*32.28,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[1]);
 			
@@ -194,8 +199,8 @@ CASE CurrentJob OF
 			CurrentJobState:='Stop Doing';
 		END_IF
 	6://Move To HOME
-		AxisMovePosition[0]:=-742579.6646;AxisMovePosition[1]:=5125.997925;AxisMovePosition[2]:=223.8519;
-		AxisMovePosition[3]:=5161.5829;AxisMovePosition[4]:=-31.9675;AxisMovePosition[5]:=774.2587;	
+		AxisMovePosition[0]:=-3683.8943;AxisMovePosition[1]:=5123.9822;AxisMovePosition[2]:=318.8809;
+		AxisMovePosition[3]:=5194.3991;AxisMovePosition[4]:=307.0219;AxisMovePosition[5]:=774.2587;	
 		AxisMoveSpeed[0]:=2000;AxisMoveSpeed[1]:=2000;AxisMoveSpeed[2]:=2000;
 		AxisMoveSpeed[3]:=2000;AxisMoveSpeed[4]:=2000;AxisMoveSpeed[5]:=2000;
 		

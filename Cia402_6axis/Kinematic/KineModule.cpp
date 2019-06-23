@@ -193,7 +193,7 @@ HRESULT CKineModule::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG_PT
 
 			Angle_Last_Arc = Angle_Now_Arc;
 
-			PoseArrayNow = kine.Fkine_Step(Angle_Now_Arc);//反解出实时位置
+			PoseArrayNow = kine.Fkine_Step(Angle_Now_Arc);//正解出实时位置
 
 			for (int i = 0; i < 3; i++)
 				m_Outputs.Pos_Now[i] = PoseArrayNow[i][3];
@@ -206,19 +206,28 @@ HRESULT CKineModule::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG_PT
 		{
 			for (int i = 0; i < 6; i++)
 				Angle_Now[i] = m_Inputs.InAngle[i];//从PLC拿到实时角度
+
+
 			for (int i = 0; i < 6; i++)
 				m_Outputs.OutAngle[i] = Angle_Now[i];//保持当前关节量不变
 
-			double xtrans = 0   - PoseArrayNow[0][3];
-			double ytrans = 0.5 - PoseArrayNow[1][3];
-			double ztrans = 0.3 - PoseArrayNow[2][3];
+
+			double xtrans = m_Inputs.CPos[0] - PoseArrayNow[0][3];
+			double ytrans = m_Inputs.CPos[1] - PoseArrayNow[1][3];
+			double ztrans = m_Inputs.CPos[2] - PoseArrayNow[2][3];
 			double L = sqrt_(pow_(xtrans, 2) + pow_(ytrans, 2) + pow_(ztrans, 2)); //distance
 
-			SizeData = ceil_(L / (0.2*0.001));//计算插补数量
+			SizeData = ceil_(L / (m_Inputs.CSpeed*PlcCycle));//计算插补数量
+			
+			double AcclerationTime = 0.5;
 
-			DataBase = traj.CartesianMove(0, 0.5, 0.3, Angle_Now, PoseArrayNow, 0.2, 0.5, 0.001);
+			if (SizeData > 0)
+			{
+				DataBase = traj.CartesianMove(m_Inputs.CPos[0], m_Inputs.CPos[1], m_Inputs.CPos[2], Angle_Now, PoseArrayNow, m_Inputs.CSpeed, AcclerationTime, PlcCycle);
 
-			CTrajOK = true;
+				CTrajOK = true;
+			}
+
 			m_Outputs.ExtPosOK = false;
 			m_Outputs.ExtPosReady = false;
 			m_counter = 0;
@@ -232,13 +241,15 @@ HRESULT CKineModule::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG_PT
 			T1[2][3] = m_Inputs.InPos[2];
 			double L = sqrt_(pow_(T1[0][3], 2) + pow_(T1[1][3], 2) + pow_(T1[2][3], 2));//运动距离
 
-			SizeData = ceil_(L / (0.2*0.001));//计算插补数量
+			SizeData = ceil_(L / (m_Inputs.LineSpeed*PlcCycle));//计算插补数量
+
+			double AcclerationTime = 0.5;
 
 			if (SizeData > 0)
 			{
-				DataBase1 = traj.MoveLine(PoseArrayNow, T1, 0.2, 0.3, 0.001);
+				DataBase1 = traj.MoveLine(PoseArrayNow, T1, m_Inputs.LineSpeed, AcclerationTime, PlcCycle);
 
-				LineTrajOK = true;			
+				LineTrajOK = true;
 			}
 
 			m_Outputs.ExtPosOK = false;
@@ -252,7 +263,7 @@ HRESULT CKineModule::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG_PT
 			{
 				for (int i = 0; i < 6; i++)
 				{
-					m_Outputs.OutAngle[i] = DataBase[i][m_counter];
+					m_Outputs.OutAngle[i] = DataBase[i][m_counter];					
 				}
 				m_counter++;
 				m_Outputs.ExtPosReady = true;
@@ -270,9 +281,10 @@ HRESULT CKineModule::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG_PT
 			if ((m_counter < SizeData) && (m_Outputs.ExtPosOK == false) && (LineTrajOK == true))
 			{
 				T2 = PoseArrayNow;
+
 				T2[0][3] = DataBase1[0][m_counter];
 				T2[1][3] = DataBase1[1][m_counter];
-				T2[2][3] = DataBase1[2][m_counter];
+				T2[2][3] = DataBase1[2][m_counter];				
 
 				Theta outangle(6, 0);
 				outangle = kine.Ikine_Step(T2, Angle_Last_Arc);
@@ -282,6 +294,7 @@ HRESULT CKineModule::CycleUpdate(ITcTask* ipTask, ITcUnknown* ipCaller, ULONG_PT
 				{
 					m_Outputs.OutAngle[i] = outangle[i] * 57.3;
 				}
+
 				m_counter++;
 				m_Outputs.ExtPosReady = true;
 			}

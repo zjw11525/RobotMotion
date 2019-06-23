@@ -75,7 +75,7 @@
             <Name>InAngle</Name>
             <BaseType GUID="{18071995-0000-0000-0000-00000000000e}">LREAL</BaseType><ArrayInfo><LBound>0</LBound><Elements>6</Elements></ArrayInfo>
           </Symbol>
-          <Symbol><Name>InPos</Name><BaseType GUID="{18071995-0000-0000-0000-00000000000e}">LREAL</BaseType><ArrayInfo><LBound>0</LBound><Elements>3</Elements></ArrayInfo></Symbol><Symbol><Name>KineModlueJob</Name><BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType></Symbol>
+          <Symbol><Name>InPos</Name><BaseType GUID="{18071995-0000-0000-0000-00000000000e}">LREAL</BaseType><ArrayInfo><LBound>0</LBound><Elements>3</Elements></ArrayInfo></Symbol><Symbol><Name>KineModlueJob</Name><BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType></Symbol><Symbol><Name>CPos</Name><BaseType GUID="{18071995-0000-0000-0000-00000000000e}">LREAL</BaseType><ArrayInfo><LBound>0</LBound><Elements>3</Elements></ArrayInfo></Symbol><Symbol><Name>LineSpeed</Name><BaseType GUID="{18071995-0000-0000-0000-00000000000e}">LREAL</BaseType></Symbol><Symbol><Name>CSpeed</Name><BaseType GUID="{18071995-0000-0000-0000-00000000000e}">LREAL</BaseType></Symbol>
         </DataArea>
         <DataArea>
           <AreaNo AreaType="OutputSrc">1</AreaNo>

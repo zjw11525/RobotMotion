@@ -2175,8 +2175,8 @@ External Setpoint Generation:
 						</Var>
 					</Vars>
 				</Axis>
-				<Axis CreateSymbols="true" AxisType="1" Id="12">
-					<Name>Axis 6</Name>
+				<Axis CreateSymbols="true" AxisType="1" Id="11">
+					<Name>Axis 5</Name>
 					<AxisPara>
 						<Dynamic Acceleration="24000" Deceleration="24000" Jerk="96000"/>
 						<Velo Maximum="6000"/>
@@ -2386,8 +2386,8 @@ External Setpoint Generation:
 						</Var>
 					</Vars>
 				</Axis>
-				<Axis CreateSymbols="true" AxisType="1" Id="11">
-					<Name>Axis 5</Name>
+				<Axis CreateSymbols="true" AxisType="1" Id="12">
+					<Name>Axis 6</Name>
 					<AxisPara>
 						<Dynamic Acceleration="24000" Deceleration="24000" Jerk="96000"/>
 						<Velo Maximum="6000"/>
@@ -2608,6 +2608,16 @@ External Setpoint Generation:
 						<Name>PlcTask Inputs</Name>
 						<Var>
 							<Name>GVL.ExtPosOK</Name>
+							<Comment>
+								<![CDATA[外部位置执行结束标志]]>
+							</Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.ExtPosReady</Name>
+							<Comment>
+								<![CDATA[外部位置规划完成]]>
+							</Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -2906,22 +2916,34 @@ External Setpoint Generation:
 						</Var>
 						<Var>
 							<Name>GVL.ExtPos</Name>
+							<Comment>
+								<![CDATA[来自CPPModule的外部位置]]>
+							</Comment>
 							<Type>ARRAY [0..5] OF LREAL</Type>
 						</Var>
 						<Var>
-							<Name>GVL.ExtPosReady</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>GVL.Pos_Now</Name>
+							<Comment>
+								<![CDATA[CPPModule输出实时笛卡尔坐标]]>
+							</Comment>
 							<Type>ARRAY [0..2] OF LREAL</Type>
 						</Var>
 					</Vars>
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>GVL.KineModuleJob</Name>
-							<Type>INT</Type>
+							<Name>GVL.LineMoveSpeed</Name>
+							<Comment>
+								<![CDATA[运动速度]]>
+							</Comment>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.CMoveSpeed</Name>
+							<Comment>
+								<![CDATA[运动速度]]>
+							</Comment>
+							<Type>LREAL</Type>
 						</Var>
 						<Var>
 							<Name>GVL.Axis[0].PlcToNc</Name>
@@ -2948,11 +2970,31 @@ External Setpoint Generation:
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 						<Var>
+							<Name>GVL.KineModuleJob</Name>
+							<Comment>
+								<![CDATA[CPPModule状态机控制]]>
+							</Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
 							<Name>GVL.OutActPos</Name>
+							<Comment>
+								<![CDATA[给CPPModule的实时位置]]>
+							</Comment>
 							<Type>ARRAY [0..5] OF LREAL</Type>
 						</Var>
 						<Var>
 							<Name>GVL.OutMovePos</Name>
+							<Comment>
+								<![CDATA[直线规划增量]]>
+							</Comment>
+							<Type>ARRAY [0..2] OF LREAL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.OutCMovePos</Name>
+							<Comment>
+								<![CDATA[笛卡尔规划增量]]>
+							</Comment>
 							<Type>ARRAY [0..2] OF LREAL</Type>
 						</Var>
 					</Vars>
@@ -3039,7 +3081,7 @@ External Setpoint Generation:
 								<AreaNo AreaType="InputDst">0</AreaNo>
 								<Name>Inputs</Name>
 								<ContextId>1</ContextId>
-								<ByteSize>74</ByteSize>
+								<ByteSize>114</ByteSize>
 								<Symbol>
 									<Name>InAngle</Name>
 									<BitSize>384</BitSize>
@@ -3065,6 +3107,28 @@ External Setpoint Generation:
 									<BitSize>16</BitSize>
 									<BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType>
 									<BitOffs>576</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>CPos</Name>
+									<BitSize>192</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<ArrayInfo>
+										<LBound>0</LBound>
+										<Elements>3</Elements>
+									</ArrayInfo>
+									<BitOffs>592</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>LineSpeed</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<BitOffs>784</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>CSpeed</Name>
+									<BitSize>64</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</BaseType>
+									<BitOffs>848</BitOffs>
 								</Symbol>
 							</DataArea>
 							<DataArea>
@@ -3530,14 +3594,14 @@ External Setpoint Generation:
 		<OwnerA Name="TINC^NC-Task 1 SAF^Axes^Axis 5">
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Drive 1 (LAN9252-EVB-HBI)">
 				<Link VarA="Drive^Inputs^In^nDcOutputTime" VarB="InfoData^DcOutputShift"/>
-				<Link VarA="Drive^Inputs^In^nState1" VarB="Module 1 (csp - axis)^Inputs^Status Word"/>
-				<Link VarA="Drive^Inputs^In^nState2" VarB="Module 1 (csp - axis)^Inputs^Status Word" Size="8" OffsB="8"/>
+				<Link VarA="Drive^Inputs^In^nState1" VarB="Module 5 (csp - axis)^Inputs^Status Word"/>
+				<Link VarA="Drive^Inputs^In^nState2" VarB="Module 5 (csp - axis)^Inputs^Status Word" Size="8" OffsB="8"/>
 				<Link VarA="Drive^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
 				<Link VarA="Drive^Inputs^In^nState4" VarB="WcState^WcState"/>
-				<Link VarA="Drive^Outputs^Out^nCtrl1" VarB="Module 1 (csp - axis)^Outputs^Control Word"/>
-				<Link VarA="Drive^Outputs^Out^nCtrl2" VarB="Module 1 (csp - axis)^Outputs^Control Word" Size="8" OffsB="8"/>
-				<Link VarA="Drive^Outputs^Out^nDataOut1" VarB="Module 1 (csp - axis)^Outputs^TargetPosition"/>
-				<Link VarA="Enc^Inputs^In^nDataIn1" VarB="Module 1 (csp - axis)^Inputs^ActualPosition"/>
+				<Link VarA="Drive^Outputs^Out^nCtrl1" VarB="Module 5 (csp - axis)^Outputs^Control Word"/>
+				<Link VarA="Drive^Outputs^Out^nCtrl2" VarB="Module 5 (csp - axis)^Outputs^Control Word" Size="8" OffsB="8"/>
+				<Link VarA="Drive^Outputs^Out^nDataOut1" VarB="Module 5 (csp - axis)^Outputs^TargetPosition"/>
+				<Link VarA="Enc^Inputs^In^nDataIn1" VarB="Module 5 (csp - axis)^Inputs^ActualPosition"/>
 				<Link VarA="Enc^Inputs^In^nDcInputTime" VarB="InfoData^DcInputShift"/>
 				<Link VarA="Enc^Inputs^In^nState4" VarB="WcState^InputToggle" Size="1" OffsA="1"/>
 				<Link VarA="Enc^Inputs^In^nState4" VarB="WcState^WcState"/>
@@ -3545,12 +3609,12 @@ External Setpoint Generation:
 		</OwnerA>
 		<OwnerA Name="TINC^NC-Task 1 SAF^Axes^Axis 6">
 			<OwnerB Name="TIID^Device 2 (EtherCAT)^Drive 1 (LAN9252-EVB-HBI)">
-				<Link VarA="Drive^Inputs^In^nState1" VarB="Module 5 (csp - axis)^Inputs^Status Word"/>
-				<Link VarA="Drive^Inputs^In^nState2" VarB="Module 5 (csp - axis)^Inputs^Status Word" Size="8" OffsB="8"/>
-				<Link VarA="Drive^Outputs^Out^nCtrl1" VarB="Module 5 (csp - axis)^Outputs^Control Word"/>
-				<Link VarA="Drive^Outputs^Out^nCtrl2" VarB="Module 5 (csp - axis)^Outputs^Control Word" Size="8" OffsB="8"/>
-				<Link VarA="Drive^Outputs^Out^nDataOut1" VarB="Module 5 (csp - axis)^Outputs^TargetPosition"/>
-				<Link VarA="Enc^Inputs^In^nDataIn1" VarB="Module 5 (csp - axis)^Inputs^ActualPosition"/>
+				<Link VarA="Drive^Inputs^In^nState1" VarB="Module 1 (csp - axis)^Inputs^Status Word"/>
+				<Link VarA="Drive^Inputs^In^nState2" VarB="Module 1 (csp - axis)^Inputs^Status Word" Size="8" OffsB="8"/>
+				<Link VarA="Drive^Outputs^Out^nCtrl1" VarB="Module 1 (csp - axis)^Outputs^Control Word"/>
+				<Link VarA="Drive^Outputs^Out^nCtrl2" VarB="Module 1 (csp - axis)^Outputs^Control Word" Size="8" OffsB="8"/>
+				<Link VarA="Drive^Outputs^Out^nDataOut1" VarB="Module 1 (csp - axis)^Outputs^TargetPosition"/>
+				<Link VarA="Enc^Inputs^In^nDataIn1" VarB="Module 1 (csp - axis)^Inputs^ActualPosition"/>
 				<Link VarA="Enc^Inputs^In^nDcInputTime" VarB="InfoData^DcInputShift"/>
 			</OwnerB>
 		</OwnerA>
@@ -3591,13 +3655,18 @@ External Setpoint Generation:
 				<Link VarA="PlcTask Inputs^GVL.Pos_Now[0]" VarB="Outputs^Pos_Now[0]"/>
 				<Link VarA="PlcTask Inputs^GVL.Pos_Now[1]" VarB="Outputs^Pos_Now[1]"/>
 				<Link VarA="PlcTask Inputs^GVL.Pos_Now[2]" VarB="Outputs^Pos_Now[2]"/>
+				<Link VarA="PlcTask Outputs^GVL.CMoveSpeed" VarB="Inputs^CSpeed"/>
 				<Link VarA="PlcTask Outputs^GVL.KineModuleJob" VarB="Inputs^KineModlueJob"/>
+				<Link VarA="PlcTask Outputs^GVL.LineMoveSpeed" VarB="Inputs^LineSpeed"/>
 				<Link VarA="PlcTask Outputs^GVL.OutActPos[0]" VarB="Inputs^InAngle[5]"/>
 				<Link VarA="PlcTask Outputs^GVL.OutActPos[1]" VarB="Inputs^InAngle[4]"/>
 				<Link VarA="PlcTask Outputs^GVL.OutActPos[2]" VarB="Inputs^InAngle[3]"/>
 				<Link VarA="PlcTask Outputs^GVL.OutActPos[3]" VarB="Inputs^InAngle[2]"/>
 				<Link VarA="PlcTask Outputs^GVL.OutActPos[4]" VarB="Inputs^InAngle[1]"/>
 				<Link VarA="PlcTask Outputs^GVL.OutActPos[5]" VarB="Inputs^InAngle[0]"/>
+				<Link VarA="PlcTask Outputs^GVL.OutCMovePos[0]" VarB="Inputs^CPos[0]"/>
+				<Link VarA="PlcTask Outputs^GVL.OutCMovePos[1]" VarB="Inputs^CPos[1]"/>
+				<Link VarA="PlcTask Outputs^GVL.OutCMovePos[2]" VarB="Inputs^CPos[2]"/>
 				<Link VarA="PlcTask Outputs^GVL.OutMovePos[0]" VarB="Inputs^InPos[0]"/>
 				<Link VarA="PlcTask Outputs^GVL.OutMovePos[1]" VarB="Inputs^InPos[1]"/>
 				<Link VarA="PlcTask Outputs^GVL.OutMovePos[2]" VarB="Inputs^InPos[2]"/>

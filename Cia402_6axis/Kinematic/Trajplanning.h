@@ -8,6 +8,7 @@
 using namespace TC_VECTOR_NAMESPACE;
 
 #define PI 3.1415926
+#define PlcCycle 0.001
 
 class Trajplanning
 {
