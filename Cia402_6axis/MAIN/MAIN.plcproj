@@ -31,6 +31,10 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\AxisEnable.TcPOU">
+      <SubType>Code</SubType>
+      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
+    </Compile>
     <Compile Include="POUs\AxisMoveAbsoulte.TcPOU">
       <SubType>Code</SubType>
       <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
@@ -40,10 +44,6 @@
       <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
     </Compile>
     <Compile Include="POUs\AxisStop.TcPOU">
-      <SubType>Code</SubType>
-      <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
-    </Compile>
-    <Compile Include="POUs\CSV read_write in text mode\AxisEnable.TcPOU">
       <SubType>Code</SubType>
       <ObjectProtection>00000000-0000-0000-0000-000000000000</ObjectProtection>
     </Compile>
@@ -146,6 +146,10 @@
       <DefaultResolution>Tc2_MC2, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_MC2</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_NcFifoAxes">
+      <DefaultResolution>Tc2_NcFifoAxes, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_NcFifoAxes</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Standard</Namespace>
@@ -229,15 +233,13 @@
           <v n="Name">"{C70B7845-2722-4a9b-A0EA-88C877A4B36F}"</v>
           <d n="SubKeys" t="Hashtable" />
           <d n="Values" t="Hashtable" ckt="String">
-            <v>EnableMaxAuthenticationTrials</v>
-            <v>true</v>
             <v>MaxAuthenticationTrials</v>
             <v>3</v>
             <v>UserList</v>
             <o t="UserList">
               <a n="Users" cet="User">
                 <o>
-                  <v n="Id">{b083be41-6c54-4e82-b06d-00f37594fe97}</v>
+                  <v n="Id">{e7618ca6-c761-4693-84b9-4239497e6673}</v>
                   <v n="Name">"Owner"</v>
                   <v n="FullName">""</v>
                   <v n="Description">""</v>
@@ -253,24 +255,24 @@
             <o t="GroupList">
               <a n="Groups" cet="Group">
                 <o>
-                  <v n="Id">{e88c9ed8-459d-4032-b702-77703f6cf689}</v>
+                  <v n="Id">{9ee785f0-c4cc-4027-9537-f16c99c266ce}</v>
                   <v n="Name">"Everyone"</v>
                   <v n="Description">""</v>
                   <v n="IsEveryoneGroup">true</v>
                   <v n="IsOwnerGroup">false</v>
                   <l n="UserMembers" t="ArrayList" cet="Guid">
-                    <v>b083be41-6c54-4e82-b06d-00f37594fe97</v>
+                    <v>e7618ca6-c761-4693-84b9-4239497e6673</v>
                   </l>
                   <l n="GroupMembers" t="ArrayList" />
                 </o>
                 <o>
-                  <v n="Id">{bb8aeea9-2d26-4ca3-94fa-a865c1548f9a}</v>
+                  <v n="Id">{d2f7e627-748c-4a2a-b090-f310fe2b613b}</v>
                   <v n="Name">"Owner"</v>
                   <v n="Description">""</v>
                   <v n="IsEveryoneGroup">false</v>
                   <v n="IsOwnerGroup">true</v>
                   <l n="UserMembers" t="ArrayList" cet="Guid">
-                    <v>b083be41-6c54-4e82-b06d-00f37594fe97</v>
+                    <v>e7618ca6-c761-4693-84b9-4239497e6673</v>
                   </l>
                   <l n="GroupMembers" t="ArrayList" />
                 </o>
@@ -279,10 +281,12 @@
             <v>UserAuthentication</v>
             <o t="UserAuthentication">
               <d n="UserToPasswordHash" t="Hashtable" ckt="Guid" cvt="String">
-                <v>b083be41-6c54-4e82-b06d-00f37594fe97</v>
+                <v>e7618ca6-c761-4693-84b9-4239497e6673</v>
                 <v>d41d8cd98f00b204e9800998ecf8427e</v>
               </d>
             </o>
+            <v>EnableMaxAuthenticationTrials</v>
+            <v>true</v>
           </d>
         </o>
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>

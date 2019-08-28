@@ -76,6 +76,21 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"114"</v>
+              <v n="TextDefault">"ChannelOv"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"113"</v>
+              <v n="TextDefault">"ChannelOver"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"116"</v>
+              <v n="TextDefault">"ChOverride"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"21"</v>
               <v n="TextDefault">"Current Job State"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -121,13 +136,83 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"119"</v>
+              <v n="TextDefault">"DisGroup"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"34"</v>
               <v n="TextDefault">"DOWN"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"102"</v>
+              <v n="TextDefault">"FIFO:%d"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"104"</v>
+              <v n="TextDefault">"FIFO_"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"110"</v>
+              <v n="TextDefault">"FIFO_)top"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"108"</v>
+              <v n="TextDefault">"FIFO_Disin"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"107"</v>
+              <v n="TextDefault">"FIFO_in"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"115"</v>
+              <v n="TextDefault">"FIFO_inte"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"106"</v>
+              <v n="TextDefault">"FIFO_overwrite"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"111"</v>
+              <v n="TextDefault">"FIFO_S"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"109"</v>
+              <v n="TextDefault">"FIFO_start"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"112"</v>
+              <v n="TextDefault">"FIFO_Stop"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"103"</v>
+              <v n="TextDefault">"FIFO_write"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"101"</v>
+              <v n="TextDefault">"FIFO长度:%d"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"0"</v>
               <v n="TextDefault">"Global State"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"120"</v>
+              <v n="TextDefault">"Group"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -138,6 +223,11 @@
             <o>
               <v n="TextID">"3"</v>
               <v n="TextDefault">"Init"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"118"</v>
+              <v n="TextDefault">"Integrate"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -186,6 +276,21 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"122"</v>
+              <v n="TextDefault">"Override"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"105"</v>
+              <v n="TextDefault">"overwrite"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"117"</v>
+              <v n="TextDefault">"Overwrite"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"62"</v>
               <v n="TextDefault">"READ"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -193,6 +298,11 @@
             <o>
               <v n="TextID">"78"</v>
               <v n="TextDefault">"s"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"121"</v>
+              <v n="TextDefault">"Start"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -493,6 +603,11 @@
             <o>
               <v n="TextID">"43"</v>
               <v n="TextDefault">"轴参数"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"100"</v>
+              <v n="TextDefault">"轴数:%d"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>

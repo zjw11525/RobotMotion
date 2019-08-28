@@ -90,6 +90,7 @@ Home_ErrorID: ARRAY[0..5] OF UDINT;
 MoveA:ARRAY [0..5] OF LREAL;
 MoveAString:ARRAY [0..5] OF STRING := ['0','0','0','0','0','0'];
 
+FIFO_POS AT%I*:ARRAY[0..5]OF LREAL;//来自ros的外部位置
 ExtPos AT%I*:ARRAY[0..5]OF LREAL;//来自CPPModule的外部位置
 ExtPosOK AT%I*:BOOL;//外部位置执行结束标志
 ExtPosReady AT%I*:BOOL;//外部位置规划完成
@@ -103,7 +104,7 @@ LineMoveSpeedString:STRING:='0.05';
 OutCMovePos AT%Q*:ARRAY[0..2]OF LREAL;//笛卡尔规划增量
 OutCMovePosString:ARRAY[0..2]OF STRING := ['0.4','0.2','0.2'];//增量字符串值
 CMoveSpeed AT%Q*:LREAL;//运动速度
-CMoveSpeedString:STRING:='0.15';
+CMoveSpeedString:STRING:='0.3';
 
 KineModuleJob AT%Q*:INT:=0;//CPPModule状态机控制
 Pos_Now AT%I*:ARRAY[0..2]OF LREAL;//CPPModule输出实时笛卡尔坐标

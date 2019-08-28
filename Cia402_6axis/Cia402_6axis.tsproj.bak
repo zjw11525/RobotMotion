@@ -1290,35 +1290,425 @@ External Setpoint Generation:
 				</Relation>
 			</Relations>
 		</DataType>
+		<DataType>
+			<Name GUID="{48415C2A-E750-483B-A619-8655B2BEA4B8}" Namespace="MC" TcBaseType="true">PLCTONC_NCICHANNEL_REF</Name>
+			<BitSize>1024</BitSize>
+			<SubItem>
+				<Name>SkipLine</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ItpMode</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>MFuncGranted</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ChnAxesOvr</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ChnSpindleOvr</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>96</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{A7A2B360-6FEB-435D-9FFA-611F383A8CEF}" Namespace="MC" TcBaseType="true" HideType="true" IecDeclaration="DWORD;">NCTOPLC_NCICHANNEL_REF_CHN_STATE</Name>
+			<BitSize>32</BitSize>
+			<SubItem>
+				<Name>bIsInterpolationChannel</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bIsKinematicChannel</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>1</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit2</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>2</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit3</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>3</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit4</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>4</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit5</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>5</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit6</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>6</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit7</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>7</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bIsEStopRequested</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>8</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit9</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>9</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bIsFeedFromBackupList</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>10</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bIsMovingBackward</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>11</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bRetraceStartPosReached</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>12</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit13</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>13</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit14</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>14</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit15</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>15</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit16</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit17</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>17</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit18</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>18</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit19</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>19</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit20</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>20</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit21</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>21</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit22</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>22</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit23</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>23</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit24</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>24</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit25</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>25</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit26</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>26</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit27</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>27</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit28</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>28</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit29</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>29</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit30</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>30</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>bBit31</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000010}">BIT</Type>
+				<BitSize>1</BitSize>
+				<BitOffs>31</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{56354211-98EF-4057-9322-975DEAD0E29D}" Namespace="MC" TcBaseType="true">NCTOPLC_NCICHANNEL_REF</Name>
+			<BitSize>1280</BitSize>
+			<SubItem>
+				<Name>BlockNo</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>FastMFuncMask</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000007}">DWORD</Type>
+				<ArrayInfo>
+					<LBound>1</LBound>
+					<Elements>5</Elements>
+				</ArrayInfo>
+				<BitSize>160</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>HskMFuncNo</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>192</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>HskMFuncReq</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>208</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>HFuncValue</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>224</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>SpindleRpm</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>256</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Tool</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>272</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ChnState</Name>
+				<Type GUID="{A7A2B360-6FEB-435D-9FFA-611F383A8CEF}" Namespace="MC">NCTOPLC_NCICHANNEL_REF_CHN_STATE</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>288</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>IntParams</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>4</Elements>
+				</ArrayInfo>
+				<BitSize>128</BitSize>
+				<BitOffs>320</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>DoubleParams</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>4</Elements>
+				</ArrayInfo>
+				<BitSize>256</BitSize>
+				<BitOffs>448</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>PathVelo</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>704</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>LoadedProg</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>768</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ItpMode</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000004}">WORD</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>800</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ItpState</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>816</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ErrorCode</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>832</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ChnId</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>864</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>GrpId</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>880</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ItfVersion</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>896</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ChnOperationState</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>928</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>McsAxisIDs</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000002}">USINT</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>8</Elements>
+				</ArrayInfo>
+				<BitSize>64</BitSize>
+				<BitOffs>960</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>AcsAxisIDs</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000002}">USINT</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>8</Elements>
+				</ArrayInfo>
+				<BitSize>64</BitSize>
+				<BitOffs>1024</BitOffs>
+			</SubItem>
+			<Relations>
+				<Relation Priority="100">
+					<Type GUID="{FBAD2F64-68D5-4C75-B9FC-E1AF58AFD97C}"/>
+					<MapEntry>
+						<BitSize>704</BitSize>
+					</MapEntry>
+					<MapEntry>
+						<BitOffsOwn>768</BitOffsOwn>
+						<BitOffsType>1056</BitOffsType>
+						<BitSize>144</BitSize>
+					</MapEntry>
+				</Relation>
+			</Relations>
+		</DataType>
 	</DataTypes>
 	<ImageDatas>
 		<ImageData Id="1000">424dd8020000000000003600000028000000100000000e0000000100180000000000a2020000120b0000120b000000000000000000001306e31306e3190ce42b1fe62b1fe61306e31f13e5190ce42519e51306e31306e3190ce42f24e7190ce41306e31306e31306e31306e35f56ec645ced645ced4137e91f13e5473de95f57ec3227e71306e3473de95a51ec271be61306e31306e31409ca524cc68e8ad74f48c1615cc82218d03e36bf716bce746fce453dc01307ce3931ba7d78d27671d1150cb21409ca1712801b1d1d1b1d1d1b1d1d1b1d1d120b891b1d1d1b1d1d1b1d1d1b1d1d120b891b1d1d1b1d1d1b1d1d1b1d1d1712801712807f8080d4d5d5d4d5d5383939120b89545656d4d5d5d4d5d5626464130c89292b2bd4d5d5d4d5d56264641915801712804647471b1d1daaaaaad4d5d5130e82383939292b2b717272d4d5d5151183d4d5d57f80801b1d1d7172721e1c81191580464747d4d5d5d4d5d51b1d1d19158a292b2bd4d5d5d4d5d5292b2b1b1b8ad4d5d56264641b1d1d1b1d1d2427821e1d81d4d5d54647476264643839391e208bd4d5d57f8080464747545656242a8bd4d5d59b9c9c292b2baaaaaa2d3683252882464747d4d5d5d4d5d51b1d1d272d85292b2bd4d5d5d4d5d5292b2b2e37861b1d1dd4d5d5d4d5d5464747394484323bb52324812122822426822526824554c0323883292b822a2d83353c84424cbf3238843940842e32834853865d6ebb5262eb3e43e83334e74147e94349e9535feb4d56ea5662eb484dea545deb636fed545aea5a63ec6671ed8ca0f290a5f2748aef6b7bee5d68ec6874ed788aef8397f17684ef7986ef8c9ff2818ff1818ef08e9df18a97f18791f19ba9f3b0c0f691a4f291a2f28390f192a1f29cacf3a3b3f498a6f3a4b3f4aebdf5b0bef59ea8f3a3adf4bbc7f7c4d1f8cad7f8ced9f9b4c4f6b8c8f6acb8f59aa3f3b6c1f6c5d2f8c2cdf8ccd7f9d2ddf9d5e0fad2daf9d5dcf9dfe7fbe2e9fbe5ebfbe8eefb0000</ImageData>
 	</ImageDatas>
 	<Project ProjectGUID="{B1BB7F07-7900-4C15-A010-4C428313498F}" Target64Bit="true">
 		<System>
-			<Settings>
-				<Cpu BaseTime="500"/>
-			</Settings>
 			<Licenses>
 				<Target>
 					<ManualSelect>{FDE02854-39A7-440C-9EAE-C234A16A3CED}</ManualSelect>
 				</Target>
 			</Licenses>
 			<Tasks>
-				<Task Id="2" Priority="20" CycleTime="10000" AmsPort="350">
+				<Task Id="2" Priority="20" CycleTime="20000" AmsPort="350">
 					<Name>PLC_TASK</Name>
 				</Task>
 				<Task Id="6" Priority="30" CycleTime="1000000" AmsPort="351">
 					<Name>VISU_TASK</Name>
 				</Task>
-				<Task Id="7" Priority="21" CycleTime="10000" AmsPort="352">
+				<Task Id="7" Priority="21" CycleTime="20000" AmsPort="352">
 					<Name>Kine</Name>
 				</Task>
 			</Tasks>
 		</System>
 		<Motion>
 			<NC>
-				<SafTask Priority="4" CycleTime="10000" AmsPort="501" IoAtBegin="true">
+				<SafTask Priority="4" CycleTime="20000" AmsPort="501" IoAtBegin="true">
 					<Name>NC-Task 1 SAF</Name>
 					<Vars VarGrpType="1" InsertType="1">
 						<Name>Inputs</Name>
@@ -1333,7 +1723,7 @@ External Setpoint Generation:
 				<SvbTask Priority="8" CycleTime="20000" AmsPort="511">
 					<Name>NC-Task 1 SVB</Name>
 				</SvbTask>
-				<Axis CreateSymbols="true" AxisType="1" Id="7">
+				<Axis CreateSymbols="true" AxisType="1" Id="1">
 					<Name>Axis 1</Name>
 					<AxisPara>
 						<Dynamic Acceleration="24000" Deceleration="24000" Jerk="96000"/>
@@ -1542,7 +1932,7 @@ External Setpoint Generation:
 						</Var>
 					</Vars>
 				</Axis>
-				<Axis CreateSymbols="true" AxisType="1" Id="8">
+				<Axis CreateSymbols="true" AxisType="1" Id="2">
 					<Name>Axis 2</Name>
 					<AxisPara>
 						<Dynamic Acceleration="24000" Deceleration="24000" Jerk="96000"/>
@@ -1753,7 +2143,7 @@ External Setpoint Generation:
 						</Var>
 					</Vars>
 				</Axis>
-				<Axis CreateSymbols="true" AxisType="1" Id="9">
+				<Axis CreateSymbols="true" AxisType="1" Id="3">
 					<Name>Axis 3</Name>
 					<AxisPara>
 						<Dynamic Acceleration="24000" Deceleration="24000" Jerk="96000"/>
@@ -1964,7 +2354,7 @@ External Setpoint Generation:
 						</Var>
 					</Vars>
 				</Axis>
-				<Axis CreateSymbols="true" AxisType="1" Id="10">
+				<Axis CreateSymbols="true" AxisType="1" Id="4">
 					<Name>Axis 4</Name>
 					<AxisPara>
 						<Dynamic Acceleration="24000" Deceleration="24000" Jerk="96000"/>
@@ -2175,7 +2565,7 @@ External Setpoint Generation:
 						</Var>
 					</Vars>
 				</Axis>
-				<Axis CreateSymbols="true" AxisType="1" Id="11">
+				<Axis CreateSymbols="true" AxisType="1" Id="5">
 					<Name>Axis 5</Name>
 					<AxisPara>
 						<Dynamic Acceleration="24000" Deceleration="24000" Jerk="96000"/>
@@ -2386,7 +2776,7 @@ External Setpoint Generation:
 						</Var>
 					</Vars>
 				</Axis>
-				<Axis CreateSymbols="true" AxisType="1" Id="12">
+				<Axis CreateSymbols="true" AxisType="1" Id="6">
 					<Name>Axis 6</Name>
 					<AxisPara>
 						<Dynamic Acceleration="24000" Deceleration="24000" Jerk="96000"/>
@@ -2597,6 +2987,39 @@ External Setpoint Generation:
 						</Var>
 					</Vars>
 				</Axis>
+				<Channel Id="2" ChannelType="3" AxesColumns="#x3f">
+					<Name>Channel 2</Name>
+					<Vars VarGrpType="1">
+						<Name>Inputs</Name>
+						<Var>
+							<Name>FromPlc</Name>
+							<Type GUID="{48415C2A-E750-483B-A619-8655B2BEA4B8}" Namespace="MC">PLCTONC_NCICHANNEL_REF</Type>
+							<BitOffs>9984</BitOffs>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2">
+						<Name>Outputs</Name>
+						<Var>
+							<Name>ToPlc</Name>
+							<Type GUID="{56354211-98EF-4057-9322-975DEAD0E29D}" Namespace="MC">NCTOPLC_NCICHANNEL_REF</Type>
+							<BitOffs>16128</BitOffs>
+						</Var>
+					</Vars>
+					<Group Id="7" GroupType="11" SetpointGeneratorType="1">
+						<Name>Group 7</Name>
+						<Parameter ChannelId="2">
+							<Dxd EnableSoftPositionLimits="true" VeloVertexFactorC0="0.1" VeloVertexFactorC1="1" CriticalVertexAngleLow="10" CriticalVertexAngleHigh="75"/>
+							<Encoder NoMotionWindow="1" NoMotionFilterTime="0.01"/>
+							<Fifo FifoDimension="6" FifoLength="200" FifoOverrideType="2" FifoOverrideChangeTime="1" TimeUnitFifo="0.1"/>
+							<Kinematic/>
+							<ParameterChanged>1796</ParameterChanged>
+							<ParameterChanged>1793</ParameterChanged>
+							<ParameterChanged>1798</ParameterChanged>
+							<ParameterChanged>1797</ParameterChanged>
+							<ParameterChanged>1794</ParameterChanged>
+						</Parameter>
+					</Group>
+				</Channel>
 			</NC>
 		</Motion>
 		<Plc>
@@ -2915,6 +3338,13 @@ External Setpoint Generation:
 							</SubVar>
 						</Var>
 						<Var>
+							<Name>GVL.FIFO_POS</Name>
+							<Comment>
+								<![CDATA[来自ros的外部位置]]>
+							</Comment>
+							<Type>ARRAY [0..5] OF LREAL</Type>
+						</Var>
+						<Var>
 							<Name>GVL.ExtPos</Name>
 							<Comment>
 								<![CDATA[来自CPPModule的外部位置]]>
@@ -2932,18 +3362,11 @@ External Setpoint Generation:
 					<Vars VarGrpType="2">
 						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>GVL.LineMoveSpeed</Name>
+							<Name>GVL.KineModuleJob</Name>
 							<Comment>
-								<![CDATA[运动速度]]>
+								<![CDATA[CPPModule状态机控制]]>
 							</Comment>
-							<Type>LREAL</Type>
-						</Var>
-						<Var>
-							<Name>GVL.CMoveSpeed</Name>
-							<Comment>
-								<![CDATA[运动速度]]>
-							</Comment>
-							<Type>LREAL</Type>
+							<Type>INT</Type>
 						</Var>
 						<Var>
 							<Name>GVL.Axis[0].PlcToNc</Name>
@@ -2970,13 +3393,6 @@ External Setpoint Generation:
 							<Type GUID="{63A84524-72E3-41C8-BEAB-4CCE44690A13}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 						<Var>
-							<Name>GVL.KineModuleJob</Name>
-							<Comment>
-								<![CDATA[CPPModule状态机控制]]>
-							</Comment>
-							<Type>INT</Type>
-						</Var>
-						<Var>
 							<Name>GVL.OutActPos</Name>
 							<Comment>
 								<![CDATA[给CPPModule的实时位置]]>
@@ -2991,11 +3407,25 @@ External Setpoint Generation:
 							<Type>ARRAY [0..2] OF LREAL</Type>
 						</Var>
 						<Var>
+							<Name>GVL.LineMoveSpeed</Name>
+							<Comment>
+								<![CDATA[运动速度]]>
+							</Comment>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
 							<Name>GVL.OutCMovePos</Name>
 							<Comment>
 								<![CDATA[笛卡尔规划增量]]>
 							</Comment>
 							<Type>ARRAY [0..2] OF LREAL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.CMoveSpeed</Name>
+							<Comment>
+								<![CDATA[运动速度]]>
+							</Comment>
+							<Type>LREAL</Type>
 						</Var>
 					</Vars>
 					<TaskPouOids>
@@ -3646,12 +4076,12 @@ External Setpoint Generation:
 			<OwnerB Name="TIXC^Kinematic^Kinematic_Obj1 (CKineModule)">
 				<Link VarA="PlcTask Inputs^GVL.ExtPosOK" VarB="Outputs^ExtPosOK"/>
 				<Link VarA="PlcTask Inputs^GVL.ExtPosReady" VarB="Outputs^ExtPosReady"/>
-				<Link VarA="PlcTask Inputs^GVL.ExtPos[0]" VarB="Outputs^OutAngle[5]"/>
-				<Link VarA="PlcTask Inputs^GVL.ExtPos[1]" VarB="Outputs^OutAngle[4]"/>
-				<Link VarA="PlcTask Inputs^GVL.ExtPos[2]" VarB="Outputs^OutAngle[3]"/>
-				<Link VarA="PlcTask Inputs^GVL.ExtPos[3]" VarB="Outputs^OutAngle[2]"/>
-				<Link VarA="PlcTask Inputs^GVL.ExtPos[4]" VarB="Outputs^OutAngle[1]"/>
-				<Link VarA="PlcTask Inputs^GVL.ExtPos[5]" VarB="Outputs^OutAngle[0]"/>
+				<Link VarA="PlcTask Inputs^GVL.ExtPos[0]" VarB="Outputs^OutAngle[0]"/>
+				<Link VarA="PlcTask Inputs^GVL.ExtPos[1]" VarB="Outputs^OutAngle[1]"/>
+				<Link VarA="PlcTask Inputs^GVL.ExtPos[2]" VarB="Outputs^OutAngle[2]"/>
+				<Link VarA="PlcTask Inputs^GVL.ExtPos[3]" VarB="Outputs^OutAngle[3]"/>
+				<Link VarA="PlcTask Inputs^GVL.ExtPos[4]" VarB="Outputs^OutAngle[4]"/>
+				<Link VarA="PlcTask Inputs^GVL.ExtPos[5]" VarB="Outputs^OutAngle[5]"/>
 				<Link VarA="PlcTask Inputs^GVL.Pos_Now[0]" VarB="Outputs^Pos_Now[0]"/>
 				<Link VarA="PlcTask Inputs^GVL.Pos_Now[1]" VarB="Outputs^Pos_Now[1]"/>
 				<Link VarA="PlcTask Inputs^GVL.Pos_Now[2]" VarB="Outputs^Pos_Now[2]"/>
