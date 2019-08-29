@@ -178,28 +178,27 @@ CASE CurrentJob OF
 			SetPointGenEnable[3].Enabled AND
 			SetPointGenEnable[4].Enabled AND
 			SetPointGenEnable[5].Enabled THEN
-
+			
+			i:=i+1;
 			//IF(GVL.ExtPosOK = TRUE) THEN
-			IF i > 4998 THEN
+			IF i > Pos_arr1[4999,5]+5 THEN
 				SetPointGenDisable[0].Execute:=TRUE;SetPointGenDisable[1].Execute:=TRUE;
 				SetPointGenDisable[2].Execute:=TRUE;SetPointGenDisable[3].Execute:=TRUE;
 				SetPointGenDisable[4].Execute:=TRUE;SetPointGenDisable[5].Execute:=TRUE;
 				setpositionGen();
 				CurrentJob:=0;
 			ELSE
-				i:=i+1;
-		
-				MC_ExtSetPointGenFeed(Position:=Pos_arr1[i,0]*24.995,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[0]);
+				MC_ExtSetPointGenFeed(Position:=-Pos_arr1[i,5]*24.995,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[0]);
 			
-				MC_ExtSetPointGenFeed(Position:=Pos_arr1[i,1]*32.28,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[1]);
+				MC_ExtSetPointGenFeed(Position:=-Pos_arr1[i,4]*32.28,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[1]);
 			
-				MC_ExtSetPointGenFeed(Position:=Pos_arr1[i,2]*49.845,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[2]);
+				MC_ExtSetPointGenFeed(Position:=Pos_arr1[i,3]*49.845,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[2]);
 			
-				MC_ExtSetPointGenFeed(Position:=Pos_arr1[i,3]*50.905,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[3]);
+				MC_ExtSetPointGenFeed(Position:=Pos_arr1[i,2]*50.905,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[3]);
 			
-				MC_ExtSetPointGenFeed(Position:=Pos_arr1[i,4]*80.34,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[4]);
+				MC_ExtSetPointGenFeed(Position:=Pos_arr1[i,1]*80.34,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[4]);
 			
-				MC_ExtSetPointGenFeed(Position:=Pos_arr1[i,5]*60.5,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[5]);
+				MC_ExtSetPointGenFeed(Position:=Pos_arr1[i,0]*60.5,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[5]);
 			END_IF
 			//GVL.KineModuleJob:=4;
 			//IF GVL.ExtPosReady THEN

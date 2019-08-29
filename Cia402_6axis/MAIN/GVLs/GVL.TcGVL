@@ -90,7 +90,6 @@ Home_ErrorID: ARRAY[0..5] OF UDINT;
 MoveA:ARRAY [0..5] OF LREAL;
 MoveAString:ARRAY [0..5] OF STRING := ['0','0','0','0','0','0'];
 
-FIFO_POS AT%I*:ARRAY[0..5]OF LREAL;//来自ros的外部位置
 ExtPos AT%I*:ARRAY[0..5]OF LREAL;//来自CPPModule的外部位置
 ExtPosOK AT%I*:BOOL;//外部位置执行结束标志
 ExtPosReady AT%I*:BOOL;//外部位置规划完成
