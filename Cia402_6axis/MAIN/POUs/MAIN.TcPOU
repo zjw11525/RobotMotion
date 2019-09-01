@@ -51,6 +51,13 @@ FiFo_overWrite:FiFoOverwrite;
 FIFO_overwrite_do:BOOL;
 FIFO_write_output:st_mcoutputs;
 
+//hand
+Control AT%Q* : UINT;
+MovType AT%Q* : UINT;
+ABSamount AT%Q* : UDINT;
+Status  AT%I* : UINT;
+EcdPos  AT%I* : UDINT;
+
 END_VAR
 VAR CONSTANT
 	GlobalSetSpeed : ARRAY[0..5]OF LREAL:=[3200,3200,3200,3200,3200,3200];
@@ -86,18 +93,18 @@ GVL.MoveA[3]:=STRING_TO_LREAL(GVL.MoveAString[3])*50.905;
 GVL.MoveA[4]:=STRING_TO_LREAL(GVL.MoveAString[4])*80.34;
 GVL.MoveA[5]:=STRING_TO_LREAL(GVL.MoveAString[5])*60.5;
 GVL.OutActPos[0]:=-GVL.Axis[0].NcToPlc.ActPos/24.995;
-GVL.OutActPos[1]:=-GVL.Axis[1].NcToPlc.ActPos/32.28;
+GVL.OutActPos[1]:=GVL.Axis[1].NcToPlc.ActPos/32.28;
 GVL.OutActPos[2]:=GVL.Axis[2].NcToPlc.ActPos/49.845;
-GVL.OutActPos[3]:=GVL.Axis[3].NcToPlc.ActPos/50.905;
-GVL.OutActPos[4]:=GVL.Axis[4].NcToPlc.ActPos/80.34;
+GVL.OutActPos[3]:=-GVL.Axis[3].NcToPlc.ActPos/50.905;
+GVL.OutActPos[4]:=-GVL.Axis[4].NcToPlc.ActPos/80.34;
 GVL.OutActPos[5]:=GVL.Axis[5].NcToPlc.ActPos/60.5;
 
 IF GVL.ExtPosReady = FALSE THEN	
 MC_ExtSetPointGenFeed(Position:=-GVL.OutActPos[0]*24.995,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[0]);	
-MC_ExtSetPointGenFeed(Position:=-GVL.OutActPos[1]*32.28,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[1]);		
+MC_ExtSetPointGenFeed(Position:=GVL.OutActPos[1]*32.28,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[1]);		
 MC_ExtSetPointGenFeed(Position:=GVL.OutActPos[2]*49.845,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[2]);		
-MC_ExtSetPointGenFeed(Position:=GVL.OutActPos[3]*50.905,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[3]);		
-MC_ExtSetPointGenFeed(Position:=GVL.OutActPos[4]*80.34,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[4]);		
+MC_ExtSetPointGenFeed(Position:=-GVL.OutActPos[3]*50.905,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[3]);		
+MC_ExtSetPointGenFeed(Position:=-GVL.OutActPos[4]*80.34,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[4]);		
 MC_ExtSetPointGenFeed(Position:=GVL.OutActPos[5]*60.5,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[5]);		
 END_IF
 
@@ -145,7 +152,8 @@ CASE CurrentJob OF
 		JogMode[5]:=MC_JOGMODE_STANDARD_FAST;
 
 		GVL.KineModuleJob:=0;
-	
+		
+		MovType:=1;//hand idle
 		CurrentJobState:='Wait Command';
 		i:=0;
 	1://SetZero
@@ -190,13 +198,13 @@ CASE CurrentJob OF
 			ELSE
 				MC_ExtSetPointGenFeed(Position:=-Pos_arr1[i,5]*24.995,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[0]);
 			
-				MC_ExtSetPointGenFeed(Position:=-Pos_arr1[i,4]*32.28,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[1]);
+				MC_ExtSetPointGenFeed(Position:=Pos_arr1[i,4]*32.28,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[1]);
 			
 				MC_ExtSetPointGenFeed(Position:=Pos_arr1[i,3]*49.845,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[2]);
 			
-				MC_ExtSetPointGenFeed(Position:=Pos_arr1[i,2]*50.905,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[3]);
+				MC_ExtSetPointGenFeed(Position:=-Pos_arr1[i,2]*50.905,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[3]);
 			
-				MC_ExtSetPointGenFeed(Position:=Pos_arr1[i,1]*80.34,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[4]);
+				MC_ExtSetPointGenFeed(Position:=-Pos_arr1[i,1]*80.34,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[4]);
 			
 				MC_ExtSetPointGenFeed(Position:=Pos_arr1[i,0]*60.5,Velocity:= 0,Acceleration:=0,Direction:=1,Axis:=Axis[5]);
 			END_IF
@@ -396,6 +404,8 @@ CASE CurrentJob OF
 	13://关节空间运动
 		GVL.KineModuleJob:=1;
 		CurrentJob:=0;
+	14:ABSamount:=1000;CurrentJob:=0;//JOGBACK
+	15:ABSamount:=0;CurrentJob:=0;//JOGFROWARD
 END_CASE
 
 //错误检测
@@ -416,6 +426,7 @@ IF POWER=TRUE THEN
 	AxisPowerTrigger[3]:=TRUE;
 	AxisPowerTrigger[4]:=TRUE;
 	AxisPowerTrigger[5]:=TRUE;
+	Control:=3;
 	AxisEnable();
 	IF  AxisPowerReady[0]=TRUE AND 
 		AxisPowerReady[1]=TRUE AND 
@@ -432,6 +443,7 @@ ELSE
 	AxisPowerTrigger[3]:=FALSE;
 	AxisPowerTrigger[4]:=FALSE;
 	AxisPowerTrigger[5]:=FALSE;
+	Control:=0;
 	AxisEnable();
 	IF  AxisPowerReady[0]=FALSE AND
 		AxisPowerReady[1]=FALSE AND

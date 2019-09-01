@@ -436,6 +436,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"125"</v>
+              <v n="TextDefault">"夹持"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"60"</v>
               <v n="TextDefault">"定零点"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -466,6 +471,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"123"</v>
+              <v n="TextDefault">"张开"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"57"</v>
               <v n="TextDefault">"往复运动"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -473,6 +483,11 @@
             <o>
               <v n="TextID">"75"</v>
               <v n="TextDefault">"执行"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"126"</v>
+              <v n="TextDefault">"松开"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -618,6 +633,11 @@
             <o>
               <v n="TextID">"48"</v>
               <v n="TextDefault">"运动模式:"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"124"</v>
+              <v n="TextDefault">"闭合"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
           </l>
