@@ -1,0 +1,4 @@
+# RobotMotion
+MotionPlanning
+
+控制新时达sd7000e机器人的TwinCAT工程，通过CPP模块实现运动轨迹规划与运动学求解，PLC模块实现逻辑控制
